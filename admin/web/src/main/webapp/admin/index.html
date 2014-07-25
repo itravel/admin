@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html ng-app="admin">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta charset="gbk">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Start Bootstrap - SB Admin Version 2.0 Demo</title>
+
+<!-- Core CSS - Include with every page -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<!-- Page-Level Plugin CSS - Blank -->
+
+<!-- SB Admin CSS - Include with every page -->
+<link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="../resources/datepicker/css/datepicker.css">
+<link rel="stylesheet" href="../resources/jQuery-File-Upload/css/jquery.fileupload.css">
+<link href="css/sb-admin.css" rel="stylesheet">
+<link href="css/snap.css" rel="stylesheet">
+<!-- <link href="css/angular-snap.css" rel="stylesheet"> -->
+<!-- Core Scripts - Include with every page -->
+<script src="//code.jquery.com/jquery-1.11.0.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../angularjs-1.2.19/angular.js"></script>
+<script src="../angularjs-1.2.19/angular-route.js"></script>
+<script src="../angularjs-1.2.19/ui-bootstrap-tpls-0.11.0.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../resources/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="../resources/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+<script src="../resources/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+<script src="js/sb-admin.js"></script>
+
+<script src="scripts/Snap.js"></script>
+<script src="scripts/angular-snap.js"></script>
+<script src="scripts/app.js"></script>
+
+<!-- Page-Level Plugin Scripts - Blank -->
+
+<!-- SB Admin Scripts - Include with every page -->
+
+<!-- Page-Level Demo Scripts - Blank - Use for reference -->
+</head>
+
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+		style="margin-bottom: 0">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">后台管理系统</a>
+		</div>
+		<!-- /.navbar-header -->
+
+
+		<div class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="side-menu">
+					<li class="sidebar-search">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div> <!-- /input-group -->
+					</li>
+					<li><a href="#"><i class="fa fa-dashboard fa-fw"></i>活动管理</a>
+					</li>
+					<li><a href="#"><i class="fa fa-table fa-fw"></i>
+							目的地管理</a></li>
+					<li><a href="#tags"><i class="fa fa-edit fa-fw"></i>
+							标签管理</a></li>
+					
+				</ul>
+				<!-- /#side-menu -->
+			</div>
+			<!-- /.sidebar-collapse -->
+		</div>
+		<!-- /.navbar-static-side -->
+	</nav>
+
+	<div id="page-wrapper">
+		
+		<div ng-view></div>
+		<!-- /.row -->
+	</div>
+	<!-- /#page-wrapper -->
+
+	<!-- /#wrapper -->
+
+	
+	
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+CREATE TABLE lvye_activity (ID BIGINT NOT NULL, end_time VARCHAR(255), feature VARCHAR(255), from_loc VARCHAR(255), scenic VARCHAR(255), start_time VARCHAR(255), title VARCHAR(255), to_loc VARCHAR(255), url VARCHAR(255), PRIMARY KEY (ID))

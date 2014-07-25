@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html ng-app="admin">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta charset="gbk">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Start Bootstrap - SB Admin Version 2.0 Demo</title>
+
+<!-- Core CSS - Include with every page -->
+<link href="admin/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<!-- Page-Level Plugin CSS - Blank -->
+<link href="admin/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<!-- SB Admin CSS - Include with every page -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="datepicker/css/datepicker.css">
+<link rel="stylesheet" href="jquery-file-upload/css/jquery.fileupload.css">
+<link href="admin/css/sb-admin.css" rel="stylesheet">
+<link href="admin/css/snap.css" rel="stylesheet">
+
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- jquery 核心包 -->
+<script src="jquery/jquery-1.11.1.js"></script>
+<!-- angularjs 核心包  -->
+<script src="angularjs-1.2.19/angular.js"></script>
+<script src="angularjs-1.2.19/angular-route.js"></script>
+<script src="angularjs-1.2.19/ui-bootstrap-tpls-0.11.0.js"></script>
+<!-- bootstrap核心包 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- 日历选择核心包 -->
+<script src="datepicker/js/bootstrap-datepicker.js"></script>
+
+<!-- 后台模板包 -->
+<script src="admin/js/sb-admin.js"></script>
+<script src="admin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="admin/js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="admin/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+<!-- 文件上传核心包 -->
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<!-- <script src="http://blueimp.github.io/JavaScript-Load-Image/js/load-image.min.js"></script> -->
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="load-image/js/load-image.js"></script>
+<script src="load-image/js/load-image-meta.js"></script>
+
+<!-- blueimp Gallery script 暂时不知道怎么用-->
+<!-- <script src="resources/image-gallery/js/bootstrap-image-gallery.js"></script> -->
+
+<script src="jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="jquery-file-upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="jquery-file-upload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="jquery-file-upload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="jquery-file-upload/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="jquery-file-upload/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+<!-- The File Upload Angular JS module -->
+<script src="jquery-file-upload/js/jquery.fileupload-angular.js"></script>	
+
+<!-- 应用 -->
+<script src="itravel/scripts/app.js"></script>
+
+</head>
+
+<body>
+	
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
+		style="margin-bottom: 0">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.html">后台管理系统</a>
+		</div>
+		<!-- /.navbar-header -->
+
+
+		<div class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="side-menu">
+					<li class="sidebar-search">
+						<div class="input-group custom-search-form">
+							<input type="text" class="form-control" placeholder="Search...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div> <!-- /input-group -->
+					</li>
+					<li><a href="#"><i class="fa fa-dashboard fa-fw"></i>活动管理</a>
+					</li>
+					<li><a href="#"><i class="fa fa-table fa-fw"></i>
+							目的地管理</a></li>
+					<li><a href="#tags"><i class="fa fa-edit fa-fw"></i>
+							标签管理</a></li>
+					
+				</ul>
+				<!-- /#side-menu -->
+			</div>
+			<!-- /.sidebar-collapse -->
+		</div>
+		<!-- /.navbar-static-side -->
+	</nav>
+
+	<div id="page-wrapper">
+		
+		<div ng-view></div>
+		<!-- /.row -->
+	</div>
+	<!-- /#page-wrapper -->
+
+	<!-- /#wrapper -->
+
+	
+
+</body>
+
+</html>
