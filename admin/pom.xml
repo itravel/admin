@@ -42,7 +42,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
-  	<!-- <plugins>
+  	<plugins>
   		<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -52,6 +52,6 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-  	</plugins> -->
+  	</plugins>
   </build>
 </project>
