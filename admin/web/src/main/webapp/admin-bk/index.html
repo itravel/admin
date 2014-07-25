@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="admin">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+<link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="../resources/admin/css/darshboard.css">
+<link rel="stylesheet" href="../resources/datepicker/css/datepicker.css">
+<link rel="stylesheet" href="../resources/jQuery-File-Upload/css/jquery.fileupload.css">
+<style type="text/css">
+
+</style>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="../angularjs-1.2.19/angular.js"></script>
+<script src="../angularjs-1.2.19/angular-route.js"></script>
+<script src="../angularjs-1.2.19/ui-bootstrap-tpls-0.11.0.js"></script>
+<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="../resources/datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../resources/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="../resources/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+<script src="../resources/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+<script src="scripts/app.js"></script>
+
+
+<title>活动管理</title>
+</head>
+<body >
+	
+	<!-- 页头导航部分开始 -->
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">后台管理系统</a>
+        </div>
+       
+      </div>
+ 	</div>
+ 	<!-- 页头导航部分结束 -->
+	<div class="container-fluid">
+		<div class="row">
+			<!-- 左导航部分开始 -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+            		<li class="active"><a href="#">活动管理</a></li>
+            		<li><a href="#">目的地管理</a></li>
+            		<li><a href="#">用户管理</a></li>
+            		<li><a href="#">其他管理</a></li>
+          		</ul>
+			</div>
+			<!-- 左导航部分结束 -->
+			
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				
+				<div ng-view></div>
+			</div>
+			
+			
+		</div>
+	</div>
+	
+	
+	<!-- 对话框 -->
+	
+	
+</body>
+</html>
