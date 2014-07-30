@@ -2,7 +2,7 @@ var services = {
     activities: "/itravel/services/activities/",
     tag: "/itravel/services/tags/",
     category: "/itravel/services/tags/categories/",
-    lvye_activity: "/admin/services/lvye_activity"
+    lvye_activity: "/admin-web/services/lvye_activity"
 
 }
 var adminModule = angular.module('admin', ['ngRoute', 'blueimp.fileupload']);

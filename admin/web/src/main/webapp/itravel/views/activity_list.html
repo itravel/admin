@@ -8,13 +8,199 @@
 </div>
 
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-lg-7">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-bar-chart-o fa-fw"></i> 编辑活动
+			</div>
+			<div class="panel-body">
+				<ng-upload-form url="/admin-web/services/images" auto-upload="true"
+					size-limit="500000"></ng-upload-form>
+
+
+
+				<form role="form" name="activityForm" ng-submit="save(activity)">
+					<div class="row form-group">
+						<div class="col-lg-12">
+						<label>标题</label> <input class="form-control"
+							ng-model="activity.title" required>
+						</div>
+					</div>
+					
+					<div class="row form-group">
+						<div class="col-md-12">
+
+							<label>活动介绍</label>
+							<textarea rows="15" class="form-control" placeholder="活动介绍"
+								ng-model="activity.abstractContent" required>
+  									</textarea>
+							<p class="help-block">填入活动详细内容.</p>
+
+						</div>
+					</div>
+
+
+					<div class="row form-group">
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-addon">开始</span>
+								<div class="input-append date" data-date="12-02-2012"
+									data-date-format="yyyy-mm-dd">
+									<input class="form-control span2" b-datepicker
+										placeholder="startTime" ng-model="activity.startTime"
+										type="text" id="startTime" required>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-addon">结束</span>
+								<div class="input-append date" data-date="12-02-2012"
+									data-date-format="yyyy-mm-dd">
+									<input class="form-control span2" b-datepicker
+										placeholder="endTime" ng-model="activity.endTime" type="text"
+										id="endTime" required>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-lg-12">
+							<div class="input-group">
+								<span class="input-group-addon">出发地</span> <input
+									class="form-control" placeholder="多个出发地，以逗号分隔"
+									ng-model="activity.fromLocations" type="text" id="from"
+									required>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-lg-12">
+							<div class="input-group">
+								<span class="input-group-addon">目的地</span> <input
+									class="form-control" placeholder="多个目的地以逗号分隔"
+									ng-model="activity.toLocations" type="text" id="to" required>
+
+							</div>
+						</div>
+					</div>
+					
+					<div class="row form-group">
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-addon">参与方式</span> <select
+									class="form-control" placeholder="type"
+									ng-model="activity.type">
+									<option value="1" >免费</option>
+									<option value="2" selected>预定</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-addon">规模</span> <select
+									class="form-control" placeholder="scale"
+									ng-model="activity.scale">
+									<option value="16" selected>大型(500人以上)</option>
+									<option value="8" selected>中型(50-500人)</option>
+									<option value="4" selected>小型(50人以下)</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row form-group">
+						<div class="col-lg-4">
+							<div class="input-group">
+								<span class="input-group-addon">人气</span> <input
+									class="form-control" placeholder="满分10分"
+									ng-model="activity.popularity" type="text" id="" required>
+
+							</div>
+						</div>
+						
+						<div class="col-lg-4">
+							<div class="input-group">
+								<span class="input-group-addon">独特性</span> <input
+									class="form-control" placeholder="满分10分"
+									ng-model="activity.originality" type="text" id="" required>
+							</div>
+						</div>
+						
+						<div class="col-lg-4">
+							<div class="input-group">
+								<span class="input-group-addon">交通</span> <input
+									class="form-control" placeholder="满分10分"
+									ng-model="activity.convenience" type="text" id="" required>
+
+							</div>
+						</div>
+						
+					</div>
+					
+					
+					<div class="row form-group">
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-addon">主办方</span> <input
+									class="form-control" placeholder=""
+									ng-model="activity.sponsor" type="text" id="" >
+
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="input-group">
+								<span class="input-group-addon">推荐者</span> <input
+									class="form-control" placeholder=""
+									ng-model="activity.recommender" type="text" id="" >
+
+							</div>
+						</div>
+					</div>
+					
+					<div class="row form-group">
+						<div class="col-lg-12">
+
+							<div class="checkbox" ng-repeat="tag in activity.tags">
+								<label> <input type="checkbox" name="tags"
+									ng-model="tag.selected" value="{{tag.id}}">
+									{{tag.tag}}
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="row form-group">
+						<div class="col-lg-12">
+							<button type="reset" class="btn btn-default" data-dismiss="modal"
+								ng-click="clear()">清除</button>
+							<button type="submit" class="btn btn-primary"
+								ng-disabled="userForm.$invalid">保存</button>
+						</div>
+					</div>
+
+
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-lg-5">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-bar-chart-o fa-fw"></i> 待选活动
+				<button class="btn btn-primary" ng-click='next()'>下一条</button>
 			</div>
 			<div class="panel-body table-responsive">
-				<table class="table table-striped  table-hover"
+				<!-- <table class="table table-striped  table-hover"
 					id="dataTables-example1">
 					<thead>
 						<tr>
@@ -34,156 +220,67 @@
 							<td>{{lvye_activity.endTime}}</td>
 						</tr>
 					</tbody>
-				</table>
-				<button class="btn btn-primary" ng-click='next()'>下一条</button>
-
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-lg-12">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<i class="fa fa-bar-chart-o fa-fw"></i> 编辑活动
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-lg-5">
-						<ng-upload-form url="/admin-web/services/images"
-							auto-upload="true" size-limit="500000"></ng-upload-form>
-					</div>
-
-					<div class="col-lg-7">
-						<form role="form" name="activityForm" ng-submit="save(activity)">
-							<div class="row form-group"></div>
-							<div class="form-group">
-								<label>标题</label> <input class="form-control"
-									ng-model="activity.title" required>
-
-							</div>
-							<div class="row form-group">
-								<div class="col-md-12">
-
-									<label>活动介绍</label>
-									<textarea rows="15" class="form-control" placeholder="活动介绍"
-										ng-model="activity.abstractContent" required>
-  									</textarea>
-									<p class="help-block">填入活动详细内容.</p>
-
-								</div>
-							</div>
-
-
-							<div class="row form-group">
-								<div class="col-lg-6">
-									<div class="input-group">
-										<span class="input-group-addon">开始</span>
-										<div class="input-append date" data-date="12-02-2012"
-											data-date-format="yyyy-mm-dd">
-											<input class="form-control span2" b-datepicker
-												placeholder="startTime" ng-model="activity.startTime"
-												type="text" id="startTime" required>
-										</div>
-									</div>
-								</div>
-
-
-								<div class="col-lg-6">
-									<div class="input-group">
-										<span class="input-group-addon">结束</span>
-										<div class="input-append date" data-date="12-02-2012"
-											data-date-format="yyyy-mm-dd">
-											<input class="form-control span2" b-datepicker
-												placeholder="endTime" ng-model="activity.endTime"
-												type="text" id="endTime" required>
-										</div>
-
-									</div>
-								</div>
-							</div>
-
-							<div class="row form-group">
-								<div class="col-lg-12">
-									<div class="input-group">
-										<span class="input-group-addon">出发地</span> <input
-											class="form-control" placeholder="多个出发地，以逗号分隔"
-											ng-model="activity.fromLocations" type="text" id="from"
-											required>
-
-									</div>
-								</div>
-							</div>
-
-							<div class="row form-group">
-								<div class="col-lg-12">
-									<div class="input-group">
-										<span class="input-group-addon">目的地</span> <input
-											class="form-control" placeholder="多个目的地以逗号分隔"
-											ng-model="activity.toLocations" type="text" id="to" required>
-
-									</div>
-								</div>
-
-							</div>
-
-							<!-- <div class="row form-group">
-						<div class="col-lg-6">
-							<div class="input-group">
-								<span class="input-group-addon">类型</span> <select
-									class="form-control" placeholder="type"
-									ng-model="activity.type">
-									<option value="256" selected>公众活动</option>
-								</select>
-							</div>
+				</table> -->
+				<form class="form-horizontal" role="form" ng-repeat="lvye_activity in lvye_activities" ng-click="go(lvye_activity)">
+					<div class="form-group">
+						<label class="col-lg-3 control-label">网址</label>
+						<div class="col-lg-9">
+							<a class="form-control-static" href="{{lvye_activity.url}}" target="_blank">{{lvye_activity.url}}</a>
 						</div>
-						<div class="col-lg-6">
-							<div class="input-group">
-								<span class="input-group-addon">规模</span> <select
-									class="form-control" placeholder="scale"
-									ng-model="activity.scale">
-									<option value="16" selected>大型(500人以上)</option>
-									<option value="8" selected>中型(50-500人)</option>
-									<option value="4" selected>小型(50人以下)</option>
-								</select>
-							</div>
-						</div>
-					</div> -->
-
-							<div class="row form-group">
-								<div class="col-lg-12">
-
-									<div class="checkbox" ng-repeat="tag in activity.tags">
-										<label> <input type="checkbox" name="dd"
-											ng-model="tag.selected" value="{{tag.id}}" required>
-											{{tag.tag}}
-										</label>
-									</div>
-								</div>
-
-
-
-
-							</div>
-
-							<div class="row form-group">
-								<button type="reset" class="btn btn-default"
-									data-dismiss="modal" ng-click="clear()">关闭</button>
-								<button type="submit" class="btn btn-primary"
-									ng-disabled="userForm.$invalid">保存</button>
-							</div>
-
-
-
-						</form>
 					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-lg-3 control-label">标题</label>
+						<div class="col-lg-9">
+							<p class="form-control-static" >{{lvye_activity.title}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-lg-3 control-label">开始时间</label>
+						<div class="col-lg-9">
+							<p class="form-control-static" >{{lvye_activity.startTime}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-lg-3 control-label">结束时间</label>
+						<div class="col-lg-9">
+							<p class="form-control-static" >{{lvye_activity.endTime}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-lg-3 control-label">景点</label>
+						<div class="col-lg-9">
+							<p class="form-control-static" >{{lvye_activity.scenic}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-lg-3 control-label">出发</label>
+						<div class="col-lg-9">
+							<p class="form-control-static" >{{lvye_activity.fromLoc}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-lg-3 control-label">目的地</label>
+						<div class="col-lg-9">
+							<p class="form-control-static" >{{lvye_activity.toLoc}}</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword" class="col-lg-3 control-label">特色</label>
+						<div class="col-lg-9">
+							<p class="form-control-static" >{{lvye_activity.feature}}</p>
+						</div>
+					</div>
+				</form>
 
-				</div>
 			</div>
 		</div>
 	</div>
 
 </div>
+
+
+
+
 
 
 
