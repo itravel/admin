@@ -14,7 +14,7 @@
 				<i class="fa fa-bar-chart-o fa-fw"></i> 编辑活动
 			</div>
 			<div class="panel-body">
-				<ng-upload-form url="/admin-web/services/images" auto-upload="true"
+				<ng-upload-form url="/admin-web/services/images/activities" auto-upload="true"
 					size-limit="500000"></ng-upload-form>
 
 
@@ -32,7 +32,7 @@
 
 							<label>活动介绍</label>
 							<textarea rows="15" class="form-control" placeholder="活动介绍"
-								ng-model="activity.abstractContent" required>
+								ng-model="activity.content" required>
   									</textarea>
 							<p class="help-block">填入活动详细内容.</p>
 
@@ -73,7 +73,7 @@
 							<div class="input-group">
 								<span class="input-group-addon">出发地</span> <input
 									class="form-control" placeholder="多个出发地，以逗号分隔"
-									ng-model="activity.fromLocations" type="text" id="from"
+									ng-model="activity.fromCity" type="text" id="from"
 									required>
 
 							</div>
@@ -85,7 +85,7 @@
 							<div class="input-group">
 								<span class="input-group-addon">目的地</span> <input
 									class="form-control" placeholder="多个目的地以逗号分隔"
-									ng-model="activity.toLocations" type="text" id="to" required>
+									ng-model="activity.destinationCity" type="text" id="to" required>
 
 							</div>
 						</div>
@@ -197,6 +197,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-bar-chart-o fa-fw"></i> 待选活动
+				<button class="btn btn-primary" ng-click='pre()'>上一条</button>
 				<button class="btn btn-primary" ng-click='next()'>下一条</button>
 			</div>
 			<div class="panel-body table-responsive">

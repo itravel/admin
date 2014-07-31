@@ -2,7 +2,7 @@ var services = {
     activities: "/itravel/services/activities/",
     tag: "/itravel/services/tags/",
     category: "/itravel/services/tags/categories/",
-    lvye_activity: "/admin/services/lvye_activity"
+    lvye_activity: "/admin-web/services/lvye_activity"
 
 }
 var adminModule = angular.module('admin', ['ngRoute', 'blueimp.fileupload']);
@@ -63,7 +63,7 @@ function($scope, $http) {
                 }
 
             }).success(function() {
-                $('#myModal').modal('hide');
+                //
             });
         } else {
             $http({
@@ -82,6 +82,19 @@ function($scope, $http) {
         $scope.activity = {};
     }
     $scope.next = function(){
+    	$scope.query_param.start-=1;
+    	if($scope.query_param.start<0){
+    		$scope.query_param.start = 0;
+    	}
+    	$http({
+            method: 'GET',
+            url: services.lvye_activity,
+            params: $scope.query_param
+        }).success(function(data) {
+            $scope.lvye_activities = data;
+        });
+    }
+    $scope.next = function(){
     	$scope.query_param.start+=1;
     	$http({
             method: 'GET',
@@ -91,8 +104,14 @@ function($scope, $http) {
             $scope.lvye_activities = data;
         });
     }
-    $scope.go = function(activity) {
-        $scope.activity = activity;
+    $scope.go = function(lvye_activity) {
+    	
+        $scope.activity.title = lvye_activity.title;
+        $scope.activity.startTime = lvye_activity.startTime;
+        $scope.activity.endTime = lvye_activity.endTime;
+        $scope.activity.fromCity = lvye_activity.fromLoc;
+        $scope.activity.destinationCity = lvye_activity.toLoc;
+        $scope.activity.destinationAddress = lvye_activity.scenic;
     }
 }).directive('bDatepicker',
 function() {
@@ -140,7 +159,9 @@ function() {
         controller: function($scope, $element, fileUpload) {
             $scope.$on('fileuploaddone',
             function(e, data) {
-                $scope.$parent.uploaded_images.push(data._response.result[0]);
+            	console.log(data._response.result.imageNames)
+                $scope.$parent.activity.images.push(data._response.result.imageNames);
+                console.log($scope.$parent.activity)
             });
 
             $scope.options = {

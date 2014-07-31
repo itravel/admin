@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -20,17 +21,19 @@ import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.collect.Maps;
 import com.google.common.io.ByteSink;
 import com.google.common.io.Files;
 
 @Path("/images")
 public class ImageResource {
+	private static final File IMAGE_DIR=new File("/usr/share/nginx/www/images/");
 	@Context
 	UriInfo uriInfo;
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	@Path("/")
+	@Path("activities")
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -38,19 +41,17 @@ public class ImageResource {
 			throws IOException {
 		List<FormDataBodyPart> bodyPartList = formDataMultiPart
 				.getFields("images");
-		ArrayNode imagesNode = mapper.createArrayNode();
-		for(FormDataBodyPart part:bodyPartList){
-			File _temp = File.createTempFile("tmp-", ".png");
-			System.out.println(_temp.toString());
-			ByteSink bs = Files.asByteSink(_temp);
-			InputStream input = part.getEntityAs(InputStream.class);
-			bs.writeFrom(input);
-			imagesNode.add(_temp.getName());
-			
+		System.out.println(bodyPartList.size());;
+		FormDataBodyPart part = bodyPartList.get(0);
+		if(!IMAGE_DIR.exists()){
+			IMAGE_DIR.mkdirs();
 		}
-		return Response.ok().entity(imagesNode.toString()).build();
-	}
-	public Response createImage(){
-		return null;
+		File _temp = File.createTempFile("activities-", ".png",IMAGE_DIR);
+		ByteSink bs = Files.asByteSink(_temp);
+		InputStream input = part.getEntityAs(InputStream.class);
+		bs.writeFrom(input);
+		Map<String,String> entity = Maps.newHashMapWithExpectedSize(1);
+		entity.put("imageNames", _temp.getName());
+		return Response.created(uriInfo.getBaseUriBuilder().path(_temp.getName()).build()).entity(mapper.writeValueAsString(entity)).build();
 	}
 }
