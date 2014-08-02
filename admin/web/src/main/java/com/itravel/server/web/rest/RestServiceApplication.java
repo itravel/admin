@@ -10,7 +10,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class RestServiceApplication extends ResourceConfig {
 	public RestServiceApplication() {
 		
-        packages("com.itravel.admin.services.rest")
+        packages("com.itravel.server.services.rest","com.itravel.admin.services.rest")
         .register(JacksonFeature.class)
         .register(MultiPartFeature.class);
     }

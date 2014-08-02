@@ -1,15 +1,15 @@
 var services = {
-    activities: "/itravel/services/activities/",
-    tag: "/itravel/services/tags/",
-    category: "/itravel/services/tags/categories/",
-    lvye_activity: "/admin-web/services/lvye_activity"
+    activities: "/admin/services/activities/",
+    tag: "/admin/services/tags/",
+    category: "/admin/services/tags/categories/",
+    lvye_activity: "/admin/services/lvye_activity"
 
 }
 var adminModule = angular.module('admin', ['ngRoute', 'blueimp.fileupload']);
 adminModule.controller('ActivitiesCtrl',
 function($scope, $http) {
     $scope.query_param = {
-        "start": 1,
+        "start": 0,
         "num": 1
     }
     $scope.activity = {
@@ -22,7 +22,7 @@ function($scope, $http) {
     
     $http({
         method: 'GET',
-        url: services.lvye_activity,
+        url: services.lvye_activity+"/unedit",
         params: $scope.query_param
     }).success(function(data) {
         $scope.lvye_activities = data;
@@ -41,6 +41,7 @@ function($scope, $http) {
     });
     
     $scope.save = function(activity) {
+    	console.log(activity);
     	var newActivity = angular.copy(activity);
     	
     	newActivity.images = newActivity.images.join(",");
@@ -56,39 +57,48 @@ function($scope, $http) {
         if (activity.id && activity.id > 0) {
             $http({
                 method: 'PUT',
-                url: services.activities + activity.id,
+                url: services.lvye_activity + "/"+activity.lvyeId,
                 data: $.param(newActivity),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
 
             }).success(function() {
-                //
+                
             });
         } else {
             $http({
                 method: 'POST',
-                url: services.activities,
+                url: services.lvye_activity + "/"+activity.lvyeId,
                 data: $.param(newActivity),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
 
+            }).success(function(data) {
+            	alert("添加活动成功")
+            	$scope.activity = {
+                		tags:[],
+                		images:[]
+                		
+                };
             });
 
         }
+        
+        
     };
     $scope.clear = function() {
         $scope.activity = {};
     }
-    $scope.next = function(){
+    $scope.pre = function(){
     	$scope.query_param.start-=1;
     	if($scope.query_param.start<0){
     		$scope.query_param.start = 0;
     	}
     	$http({
             method: 'GET',
-            url: services.lvye_activity,
+            url: services.lvye_activity+"/unedit",
             params: $scope.query_param
         }).success(function(data) {
             $scope.lvye_activities = data;
@@ -98,7 +108,7 @@ function($scope, $http) {
     	$scope.query_param.start+=1;
     	$http({
             method: 'GET',
-            url: services.lvye_activity,
+            url: services.lvye_activity+"/unedit",
             params: $scope.query_param
         }).success(function(data) {
             $scope.lvye_activities = data;
@@ -112,6 +122,7 @@ function($scope, $http) {
         $scope.activity.fromCity = lvye_activity.fromLoc;
         $scope.activity.destinationCity = lvye_activity.toLoc;
         $scope.activity.destinationAddress = lvye_activity.scenic;
+        $scope.activity.lvyeId = lvye_activity.id;
     }
 }).directive('bDatepicker',
 function() {
@@ -129,9 +140,6 @@ function() {
 
             }).on('changeDate',
             function(e) {
-                // var outputDate = new Date(e.date);
-                // var n = outputDate.getTime();
-                console.log(e);
                 ngModelCtrl.$setViewValue(e.currentTarget.value);
                 scope.$apply();
             });
@@ -319,9 +327,4 @@ function($routeProvider) {
 
 }]);
 
-/*
- * adminModule.directive('bDatepicker', function () {
- * 
- * return { restrict: 'A', require: "ngModel", template:'<div>dfdfd</div>',
- * link: function (scope, element, attr,ngModelCtrl) { element.modal(); } }; });
- */
+

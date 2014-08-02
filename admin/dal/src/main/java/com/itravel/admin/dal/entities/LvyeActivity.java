@@ -44,6 +44,12 @@ public class LvyeActivity implements Serializable {
 	@Column(name="end_time")
 	private String endTime;
 	
+	@Column(name="has_edit")
+	private boolean hasEdit;
+	
+	@Column(name="editor")
+	private String editor;
+	
 	private static final long serialVersionUID = 1L;
 
 	public LvyeActivity() {
@@ -95,7 +101,7 @@ public class LvyeActivity implements Serializable {
 	public String getStartTime() {
 		return startTime;
 	}
-	public void setgetStartTime(String startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 	public String getEndTime() {
@@ -104,7 +110,21 @@ public class LvyeActivity implements Serializable {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+	
+	
    
+	public boolean isHasEdit() {
+		return hasEdit;
+	}
+	public void setHasEdit(boolean hasEdit) {
+		this.hasEdit = hasEdit;
+	}
+	public String getEditor() {
+		return editor;
+	}
+	public void setEditor(String editor) {
+		this.editor = editor;
+	}
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

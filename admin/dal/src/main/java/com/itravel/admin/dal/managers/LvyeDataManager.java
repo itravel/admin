@@ -51,4 +51,25 @@ public class LvyeDataManager {
 		manager.close();
 		return activities;
 	}
+	
+	/**
+	 * 获取部分数据
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	public List<LvyeActivity> getUnEditPart(int offset,int limit){
+		EntityManager manager = emf.createEntityManager();
+		List<LvyeActivity> activities = manager.createQuery("select L from LvyeActivity L where L.hasEdit != 1 order by L.id",LvyeActivity.class).setFirstResult(offset).setMaxResults(limit).getResultList();
+		manager.close();
+		return activities;
+	}
+
+	public LvyeActivity get(long id) {
+		// TODO Auto-generated method stub
+		EntityManager manager = emf.createEntityManager();
+		LvyeActivity entity = manager.find(LvyeActivity.class, id);
+		manager.close();
+		return entity;
+	}
 }

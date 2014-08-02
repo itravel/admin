@@ -40,5 +40,15 @@
   		<groupId>org.glassfish.jersey.media</groupId>
   		<artifactId>jersey-media-json-jackson</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>com.itravel</groupId>
+  		<artifactId>server-dal</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.itravel</groupId>
+  		<artifactId>server-service</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>
