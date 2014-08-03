@@ -35,11 +35,12 @@ angular.module('admin')
 		        $scope.activity.title = lvye_activity.title;
 		        $scope.activity.startTime = lvye_activity.startTime;
 		        $scope.activity.endTime = lvye_activity.endTime;
-		        $scope.activity.fromCity = lvye_activity.fromLoc;
-		        $scope.activity.destinationCity = lvye_activity.toLoc;
-		        $scope.activity.destinationAddress = lvye_activity.scenic;
+		        $scope.activity.from = lvye_activity.fromAddress;
+		        $scope.activity.destination = lvye_activity.destinationAddress;
+		        $scope.activity.scenerySpot = lvye_activity.scenic.split(" ").join(",");
 		        $scope.activity.lvyeId = lvye_activity.id;
 		        $scope.activity.web = lvye_activity.url;
+		        $scope.activity.content = lvye_activity.content;
 		    };
 		    
 		    $scope.clear = function() {
@@ -49,7 +50,7 @@ angular.module('admin')
 		    $scope.save = function(activity) {
 		    	var newActivity = angular.copy(activity);
 		    	
-		    	newActivity.images = newActivity.images.join(",");
+		    	newActivity.images = activity.images.join(",");
 		    	var selectedTags = [];
 		    	angular.forEach(activity.tags,function(tag){
 		    		console.log(tag.selected)
@@ -60,37 +61,7 @@ angular.module('admin')
 		    	
 		    	newActivity.tags = selectedTags.join(",");
 		    	AdminService.saveActivity(newActivity);
-/*		        if (activity.id && activity.id > 0) {
-		            $http({
-		                method: 'PUT',
-		                url: services.lvye_activity + "/"+activity.lvyeId,
-		                data: $.param(newActivity),
-		                headers: {
-		                    'Content-Type': 'application/x-www-form-urlencoded'
-		                }
 
-		            }).success(function() {
-		                
-		            });
-		        } else {
-		            $http({
-		                method: 'POST',
-		                url: services.lvye_activity + "/"+activity.lvyeId,
-		                data: $.param(newActivity),
-		                headers: {
-		                    'Content-Type': 'application/x-www-form-urlencoded'
-		                }
-
-		            }).success(function(data) {
-		            	alert("添加活动成功")
-		            	$scope.activity = {
-		                		tags:[],
-		                		images:[]
-		                		
-		                };
-		            });
-
-		        }*/
 		        
 		        
 		    };

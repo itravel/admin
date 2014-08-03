@@ -41,7 +41,6 @@ public class ImageResource {
 			throws IOException {
 		List<FormDataBodyPart> bodyPartList = formDataMultiPart
 				.getFields("images");
-		System.out.println(bodyPartList.size());;
 		FormDataBodyPart part = bodyPartList.get(0);
 		if(!IMAGE_DIR.exists()){
 			IMAGE_DIR.mkdirs();
