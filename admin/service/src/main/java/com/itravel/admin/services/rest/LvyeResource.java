@@ -25,6 +25,7 @@ import com.itravel.admin.services.rest.params.ActivityBeanParam;
 import com.itravel.server.dal.entities.ActivityEntity;
 import com.itravel.server.dal.managers.ActivityManager;
 import com.itravel.server.services.rest.params.ActivitiesFormParam;
+import com.itravel.server.services.rest.params.ActivitiesFormParam.ValidationEnum;
 @Singleton
 @Path("/lvye_activity")
 public class LvyeResource {
@@ -59,9 +60,9 @@ public class LvyeResource {
 			@PathParam(value="id") long lvyeId,
 			@FormParam(value="editor") String editor,
 			@BeanParam ActivitiesFormParam beanParams){
-		int v = beanParams.validate();
-		if(v<0){
-			return Response.serverError().entity(v).build();
+		ValidationEnum v = beanParams.validate();
+		if(v != ValidationEnum.SUCC){
+			return Response.serverError().entity(v.getMessage()).build();
 		}
 		ActivityEntity activity = Optional.fromNullable(beanParams).transform(new Function<ActivitiesFormParam,ActivityEntity>(){
 
@@ -78,6 +79,7 @@ public class LvyeResource {
 				}
 				return entity;
 			}}).get();
+//		activity.setContent("");
 		actManager.save(activity);
 		LvyeActivity lvye = manager.get(lvyeId);
 		lvye.setHasEdit(true);

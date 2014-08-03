@@ -28,8 +28,10 @@ angular.module('admin')
             saveActivity:function(activity){
             	var d = $q.defer();
             	LvyeActivityDao.saveEdit(activity).success(function(data){
+            		alert("保存成功")
                     d.resolve(data);
                 }).error(function(data){
+                	alert(data)
                     d.reject(data);
                 });
 

@@ -53,9 +53,9 @@ angular.module('admin')
 		    	newActivity.images = activity.images.join(",");
 		    	var selectedTags = [];
 		    	angular.forEach(activity.tags,function(tag){
-		    		console.log(tag.selected)
+		    		
 		    		if(tag.selected===true){
-		    			selectedTags.push(tag.id);
+		    			selectedTags.push(tag.tag);
 		    		}
 		    	});
 		    	
