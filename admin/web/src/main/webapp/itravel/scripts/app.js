@@ -6,6 +6,14 @@ var services = {
 
 }
 var adminModule = angular.module('admin', ['ngRoute', 'blueimp.fileupload']);
+adminModule.constant('serviceUrl',{
+	activities: "/admin/services/activities/",
+    tag: "/admin/services/tags/",
+    category: "/admin/services/tags/categories/",
+    lvye: "/admin/services/lvye_activity",
+    lvyeUnedit: '/admin/services/lvye_activity/unedit'
+	
+});
 adminModule.controller('ActivitiesCtrl',
 function($scope, $http) {
     $scope.query_param = {
@@ -88,10 +96,8 @@ function($scope, $http) {
         
         
     };
-    $scope.clear = function() {
-        $scope.activity = {};
-    }
-    $scope.pre = function(){
+   
+   /* $scope.pre = function(){
     	$scope.query_param.start-=1;
     	if($scope.query_param.start<0){
     		$scope.query_param.start = 0;
@@ -113,17 +119,8 @@ function($scope, $http) {
         }).success(function(data) {
             $scope.lvye_activities = data;
         });
-    }
-    $scope.go = function(lvye_activity) {
-    	
-        $scope.activity.title = lvye_activity.title;
-        $scope.activity.startTime = lvye_activity.startTime;
-        $scope.activity.endTime = lvye_activity.endTime;
-        $scope.activity.fromCity = lvye_activity.fromLoc;
-        $scope.activity.destinationCity = lvye_activity.toLoc;
-        $scope.activity.destinationAddress = lvye_activity.scenic;
-        $scope.activity.lvyeId = lvye_activity.id;
-    }
+    }*/
+    
 }).directive('bDatepicker',
 function() {
 
@@ -173,6 +170,9 @@ function() {
             });
 
             $scope.options = {
+            	previewMaxWidth:100,
+            	previewMaxHeight: 100,
+            	previewCrop: true ,// Force cropped images
                 url: $scope.url,
                 dropZone: $element,
                 maxFileSize: $scope.sizeLimit,
@@ -319,7 +319,7 @@ adminModule.config(['$routeProvider',
 function($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'itravel/views/activity_list.html',
-        controller: 'ActivitiesCtrl'
+        controller: 'LvyeActivitiesCtrl'
     }).when('/tags', {
         templateUrl: 'itravel/views/tags_list.html',
         controller: 'TagCtrl'
