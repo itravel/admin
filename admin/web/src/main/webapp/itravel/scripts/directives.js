@@ -1,7 +1,6 @@
 angular.module('admin')
 .directive('ngUploadForm', ['fileUpload',
 function() {
-	console.log("----")
     return {
         restrict: 'E',
         templateUrl: 'itravel/views/fileform.html',
@@ -67,10 +66,13 @@ function() {
             fileUpload.registerField($scope.name);
             $scope.filequeue = fileUpload.fieldData[$scope.name];
 
-            $scope.$watchCollection('filequeue',
-            function(newval) {
+            $scope.$watchCollection('filequeue',function(newval) {
                 generateFileObject(newval);
             });
+            $scope.remove = function(file){
+            	console.log($scope.filequeue)
+            }
+            
         }
     };
 }]).controller('FileDestroyController', ['$rootScope', '$scope', '$http', 'fileUpload',
