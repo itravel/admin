@@ -202,12 +202,19 @@ function($scope, $http) {
 
 adminModule.config(['$routeProvider',
 function($routeProvider) {
-    $routeProvider.when('/', {
-        templateUrl: 'itravel/views/activity_list.html',
-        controller: 'LvyeActivitiesCtrl'
-    }).when('/tags', {
+    $routeProvider
+    .when('/', {
+        templateUrl: 'itravel/views/activities_list.html',
+        controller: 'ActivitiesCtrl'
+    })
+    .when('/tags', {
         templateUrl: 'itravel/views/tags_list.html',
         controller: 'TagCtrl'
+    })
+    .when('/lvye',{
+    	templateUrl: 'itravel/views/lvye_activity_list.html',
+        controller: 'LvyeActivitiesCtrl'
+    	
     });
 
 }]);

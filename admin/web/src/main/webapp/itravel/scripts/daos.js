@@ -89,9 +89,10 @@ angular.module('admin')
 .factory('ActivityDao',  ['BaseHttp','serviceUrl', function ($http,serviceUrl) {
 
     return {
-        list: function () {
+        list: function (offset,num) {
             return $http({
                 method: 'GET',
+                params:{'start':offset,'number':num},
                 url: serviceUrl.activities
             });
         },

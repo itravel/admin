@@ -27,7 +27,7 @@ function() {
                 url: $scope.url,
                 dropZone: $element,
                 maxFileSize: $scope.sizeLimit,
-                autoUpload: $scope.autoUpload
+                autoUpload: false
             };
             $scope.loadingFiles = true;
 
@@ -70,7 +70,9 @@ function() {
                 generateFileObject(newval);
             });
             $scope.remove = function(file){
-            	console.log($scope.filequeue)
+            	angular.forEach($scope.queue,function(item,index){
+            		$scope.queue.splice(index,1);
+            	})
             }
             
         }

@@ -48,6 +48,17 @@ angular.module('admin')
                     d.reject(data);
                 });
                 return d.promise;
+            },
+            
+            listActivity:function(start){
+            	var d = $q.defer();
+
+                ActivityDao.list(start,15).success(function(data){
+                    d.resolve(data);
+                }).error(function(data){
+                    d.reject(data);
+                });
+                return d.promise;
             }
         };
     }])

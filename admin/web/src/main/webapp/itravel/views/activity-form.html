@@ -1,0 +1,197 @@
+<form role="form" name="activityForm" ng-submit="save(activity)">
+	<input type="hidden" ng-model="ngModel.images">
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<label>标题{{tags}},,{{activity}}</label> <input class="form-control"
+				ng-model="ngModel.title" required>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-md-12">
+
+			<label>活动介绍</label>
+			<textarea rows="15" class="form-control" placeholder="活动介绍"
+				ng-model="ngModel.content" required>
+  									</textarea>
+			<p class="help-block">填入活动详细内容.</p>
+
+		</div>
+	</div>
+
+
+	<div class="row form-group">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">开始</span>
+				<div class="input-append date" data-date="12-02-2012"
+					data-date-format="yyyy-mm-dd">
+					<input class="form-control span2" b-datepicker
+						placeholder="startTime" ng-model="ngModel.startTime" type="text"
+						id="startTime" required>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">结束</span>
+				<div class="input-append date" data-date="12-02-2012"
+					data-date-format="yyyy-mm-dd">
+					<input class="form-control span2" b-datepicker
+						placeholder="endTime" ng-model="ngModel.endTime" type="text"
+						id="endTime" required>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon">出发地</span> <input
+					class="form-control" placeholder="多个出发地，以逗号分隔"
+					ng-model="ngModel.from" type="text" id="from" required>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon">目的地</span> <input
+					class="form-control" placeholder="多个目的地以逗号分隔"
+					ng-model="ngModel.destination" type="text" id="to" required>
+
+			</div>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon">景点</span> <input
+					class="form-control" placeholder="多个景点用逗号分隔"
+					ng-model="ngModel.scenerySpot" type="text" id="senerySpot">
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">参与方式</span> <select
+					class="form-control" placeholder="type" ng-model="ngModel.type">
+					<option value="1">免费</option>
+					<option value="2" selected>预定</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">规模</span> <select
+					class="form-control" placeholder="scale" ng-model="ngModel.scale">
+					<option value="16" selected>大型(500人以上)</option>
+					<option value="8" selected>中型(50-500人)</option>
+					<option value="4" selected>小型(50人以下)</option>
+				</select>
+			</div>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon">人气</span> <input
+					class="form-control" placeholder="满分10分"
+					ng-model="ngModel.popularity" type="text" id="">
+
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon">独特性</span> <input
+					class="form-control" placeholder="满分10分"
+					ng-model="ngModel.originality" type="text" id="">
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon">交通</span> <input
+					class="form-control" placeholder="满分10分"
+					ng-model="ngModel.convenience" type="text" id="">
+
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="row form-group">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">主办方</span> <input
+					class="form-control" placeholder="" ng-model="ngModel.sponsor"
+					type="text" id="">
+
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">推荐者</span> <input
+					class="form-control" placeholder="" ng-model="ngModel.recommender"
+					type="text" id="">
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon">联系方式</span> <input
+					class="form-control" placeholder="联系方式" ng-model="ngModel.contact"
+					type="text" id="">
+
+			</div>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon">网址</span> <input
+					class="form-control" placeholder="网址" ng-model="ngModel.web"
+					type="text" id="">
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-lg-12">
+
+			<div class="checkbox" ng-repeat="(key,tag) in tags">
+				<label> <input type="checkbox" name="tags"
+					ng-model="tag.selected" value="{{tag.id}}"> {{tag.tag}}
+				</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<button type="reset" class="btn btn-default"
+				ng-click="clear()">清除</button>
+			<button type="submit" class="btn btn-primary"
+				ng-disabled="userForm.$invalid">保存</button>
+		</div>
+	</div>
+
+
+
+</form>
