@@ -85,6 +85,8 @@ angular.module('admin')
     };
 }]);
 /*-------------------活动DAO---------------------------------*/
+
+
 angular.module('admin')
 .factory('ActivityDao',  ['BaseHttp','serviceUrl', function ($http,serviceUrl) {
 

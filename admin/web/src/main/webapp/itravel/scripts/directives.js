@@ -16,13 +16,12 @@ function() {
         controller: function($scope, $element, fileUpload) {
             $scope.$on('fileuploaddone',
             function(e, data) {
-            	console.debug(data)
-                $scope.$parent.activity.images.push(data._response.result.imageNames);
+                $scope.ngModel.images.push(data._response.result.imageNames);
             });
 
             $scope.options = {
-            	previewMaxWidth:100,
-            	previewMaxHeight: 100,
+            	previewMaxWidth:200,
+            	previewMaxHeight: 200,
             	previewCrop: true ,// Force cropped images
                 url: $scope.url,
                 dropZone: $element,

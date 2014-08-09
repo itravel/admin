@@ -8,7 +8,6 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 			ngModel : '=',
 		},
 		controller : function($scope, $element) {
-			
 			$scope.tags={};
 			AdminService.getTags().then(function(data) {
 
@@ -25,27 +24,26 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 				if(!newVal){
 					return;
 				}
-				var selectedTags = newVal.split(",")
-				angular.forEach(selectedTags,function(value){
-					console.log(value)
-					scope.tags["'"+value+"'"].selected=true;
+				angular.forEach(newVal,function(value){
+					if(scope.tags["'"+value+"'"]){
+						scope.tags["'"+value+"'"].selected=true;
+					}
 					
 					
 				})
 			});
-			$scope.$watch('ngModel.images',function(){
-				
+			
+			$scope.$watchCollection('ngModel.images',function(){
+				console.log("-----")
 			});
 			$scope.clear = function() {
 				$scope.ngModel = {};
 			};
 			// 保存到服务器
 			$scope.save = function(activity) {
-				console.log(activity)
-//				console.log($scope.tags)
 				var newActivity = angular.copy(activity);
 
-//				newActivity.images = activity.images.join(",");
+				newActivity.images = activity.images.join(",");
 				var selectedTags = [];
 				angular.forEach($scope.tags, function(tag) {
 
@@ -55,6 +53,7 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 				});
 
 				newActivity.tags = selectedTags.join(",");
+				console.debug(newActivity);
 				AdminService.saveActivity1(newActivity);
 
 			};

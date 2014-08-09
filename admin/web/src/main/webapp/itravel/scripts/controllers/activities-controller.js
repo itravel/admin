@@ -16,15 +16,16 @@ angular.module('admin').controller(
 									'tag' : value.tag,
 									'selected' : 'false'
 								}
-							/*$scope.tags.push({
-								'id' : value.id,
-								'tag' : value.tag,
-								'selected' : 'false'
-							})*/
 						})
 					});
 					$scope.detail = function(activity) {
-						$scope.activity = activity;
+						$scope.activity = angular.copy(activity);
+						if(activity.images){
+							$scope.activity.images = activity.images.split(",");
+						}
+						if(activity.tags){
+							$scope.activity.tags = activity.tags.split(",");
+						}
 					}
 
 				} ]);
