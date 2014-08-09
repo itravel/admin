@@ -112,6 +112,17 @@ angular.module('admin')
                     	
                 }
             });
+        },
+        update:function(id,data){
+        	return $http({
+                method: 'PUT',
+                url: serviceUrl.activities+"/"+id,
+                data: $.param(data),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                    	
+                }
+            });
         }
     };
 }]);

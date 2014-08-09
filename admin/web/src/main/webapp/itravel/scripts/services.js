@@ -38,7 +38,29 @@ angular.module('admin')
                 return d.promise;
             	
             },
+            saveActivity1:function(activity){
+            	var d = $q.defer();
+            	if(activity.id&&activity.id>0){
+            		ActivityDao.update(activity.id,activity).success(function(data){
+                		alert("save successfully")
+                        d.resolve(data);
+                    }).error(function(data){
+                    	alert(data)
+                        d.reject(data);
+                    });
+            	}
+            	else {
+            		ActivityDao.create(activity).success(function(data){
+                		alert("save successfully")
+                        d.resolve(data);
+                    }).error(function(data){
+                    	alert(data)
+                        d.reject(data);
+                    });
+            	}
 
+                return d.promise;
+            },
             get: function (id) {
                 var d = $q.defer();
 

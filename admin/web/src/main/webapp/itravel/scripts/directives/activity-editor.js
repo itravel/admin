@@ -41,11 +41,13 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 			};
 			// 保存到服务器
 			$scope.save = function(activity) {
+				console.log(activity)
+//				console.log($scope.tags)
 				var newActivity = angular.copy(activity);
 
-				newActivity.images = activity.images.join(",");
+//				newActivity.images = activity.images.join(",");
 				var selectedTags = [];
-				angular.forEach(activity.tags, function(tag) {
+				angular.forEach($scope.tags, function(tag) {
 
 					if (tag.selected === true) {
 						selectedTags.push(tag.tag);
@@ -53,7 +55,7 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 				});
 
 				newActivity.tags = selectedTags.join(",");
-				AdminService.saveActivity(newActivity);
+				AdminService.saveActivity1(newActivity);
 
 			};
 		}
