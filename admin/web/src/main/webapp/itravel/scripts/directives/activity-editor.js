@@ -6,6 +6,7 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 		require : '^ngModel',
 		scope : {
 			ngModel : '=',
+			activity:'&'
 		},
 		controller : function($scope, $element) {
 			$scope.tags={};
@@ -18,6 +19,12 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 							'selected' : 'false'
 						}
 				})
+			});
+			$scope.$watch('ngModel',function(newVal,oldVal,scope){
+				console.log(newVal);
+				if(newVal){
+					scope.activity = newVal;
+				}
 			});
 			$scope.$watch('ngModel.tags',function(newVal, oldVal, scope) {
 				

@@ -2,10 +2,11 @@ angular.module('admin').controller(
 		'ActivitiesCtrl',
 		[ '$scope', '$location', '$routeParams', 'AdminService',
 				function($scope, $location, $routeParams, AdminService) {
+					$scope.currentPage = 0;
 					$scope.activity = {};
 					$scope.activities = [];
 					$scope.tags={};
-					AdminService.listActivity(20).then(function(data) {
+					AdminService.listActivity($scope.currentPage).then(function(data) {
 						$scope.activities = data;
 					});
 					AdminService.getTags().then(function(data) {
@@ -26,6 +27,25 @@ angular.module('admin').controller(
 						if(activity.tags){
 							$scope.activity.tags = activity.tags.split(",");
 						}
+					};
+					$scope.prePage = function (){
+						if($scope.currentPage <= 0){
+							return ;
+						}
+						$scope.currentPage -=1;
+						var offset = $scope.currentPage *15;
+						AdminService.listActivity(offset).then(function(data) {
+							$scope.activities = data;
+						});
+					};
+					$scope.nextPage = function() {
+						var offset = ($scope.currentPage+1)*15 
+						AdminService.listActivity(offset).then(function(data) {
+							if(data.length>0){
+								$scope.activities = data;
+								$scope.currentPage +=1;
+							}
+						});
 					}
 
 				} ]);
