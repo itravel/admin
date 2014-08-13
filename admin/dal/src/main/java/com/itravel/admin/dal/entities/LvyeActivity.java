@@ -34,8 +34,8 @@ public class LvyeActivity implements Serializable {
 	@Column(name="from_address")
 	private String fromAddress;
 
-	@Column(name="has_edit")
-	private boolean hasEdit;
+	@Column(name="edit_status")
+	private int editStatus;
 
 	private String jiaotong;
 
@@ -111,12 +111,12 @@ public class LvyeActivity implements Serializable {
 		this.fromAddress = fromAddress;
 	}
 
-	public boolean getHasEdit() {
-		return this.hasEdit;
+	public int getEditStatus() {
+		return this.editStatus;
 	}
 
-	public void setHasEdit(boolean hasEdit) {
-		this.hasEdit = hasEdit;
+	public void setEditStatus(int editStatus) {
+		this.editStatus = editStatus;
 	}
 
 	public String getJiaotong() {

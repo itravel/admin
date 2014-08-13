@@ -6,7 +6,8 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 		require : '^ngModel',
 		scope : {
 			ngModel : '=',
-			activity:'&'
+			activity:'&',
+			url:'='
 		},
 		controller : function($scope, $element) {
 			$scope.tags={};
@@ -48,6 +49,7 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 			};
 			// 保存到服务器
 			$scope.save = function(activity) {
+				$scope.$emit("saveActivity",true);
 				var newActivity = angular.copy(activity);
 
 				newActivity.images = activity.images.join(",");

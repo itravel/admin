@@ -51,7 +51,10 @@ angular.module('admin')
 		        $scope.activity.web = lvye_activity.url;
 		        $scope.activity.content = lvye_activity.content;
 		    };
-		    
+		    $scope.$on("saveActivity",function(d,data){
+		    	AdminService.saveActivity($scope.activity);
+		    	console.log("------`")
+		    });
 		   
 		}	
 	]
