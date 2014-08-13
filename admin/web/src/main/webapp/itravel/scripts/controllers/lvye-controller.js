@@ -9,7 +9,8 @@ angular.module('admin')
 			$scope.tags={};
 		    $scope.uploaded_images = [];
 		    AdminService.getLvyeUnedit($scope.query_param.start).then(function(data) {
-		    	$scope.lvye_activities = data;
+//		    	$scope.lvye_activities = data;
+		    	$scope.go(data[0]);
 			});
 		    AdminService.getTags().then(function(data) {
 
@@ -27,13 +28,15 @@ angular.module('admin')
 		    		$scope.query_param.start = 0;
 		    	}
 		    	AdminService.getLvyeUnedit($scope.query_param.start).then(function(data) {
-			    	 $scope.lvye_activities = data;
+//			    	 $scope.lvye_activities = data;
+		    		$scope.go(data[0]);
 				});
 		    };
 		    $scope.next = function(){
 		    	$scope.query_param.start+=1;
 		    	AdminService.getLvyeUnedit($scope.query_param.start).then(function(data) {
-			    	 $scope.lvye_activities = data;
+//			    	 $scope.lvye_activities = data;
+		    		$scope.go(data[0]);
 				});
 		    };
 		    $scope.go = function(lvye_activity) {

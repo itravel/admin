@@ -28,6 +28,8 @@ import com.google.common.io.Files;
 @Path("/images")
 public class ImageResource {
 	private static final File IMAGE_DIR=new File("/usr/share/nginx/www/images/");
+	private static final File IMAGE_TEMP_DIR=new File("/temp");
+	
 	@Context
 	UriInfo uriInfo;
 	
@@ -45,7 +47,7 @@ public class ImageResource {
 		if(!IMAGE_DIR.exists()){
 			IMAGE_DIR.mkdirs();
 		}
-		File _temp = File.createTempFile("activities-", ".png",IMAGE_DIR);
+		File _temp = File.createTempFile("activities-", ".png",IMAGE_TEMP_DIR);
 		ByteSink bs = Files.asByteSink(_temp);
 		InputStream input = part.getEntityAs(InputStream.class);
 		bs.writeFrom(input);
