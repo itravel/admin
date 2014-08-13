@@ -20,7 +20,14 @@
 					size-limit="500000" ng-model="activity"></ng-upload-form>
 
 
-
+				<div class="row">
+					
+						<label class="col-lg-3 control-label">网址</label>
+						<div class="col-lg-9">
+							<a class="form-control-static" href="{{activity.web}}" target="_blank">{{activity.web}}</a>
+						</div>
+					
+				</div>
 				<ng-activity-form ng-model="activity" tag-list= "tags"></ng-activity-form>
 
 			</div>
