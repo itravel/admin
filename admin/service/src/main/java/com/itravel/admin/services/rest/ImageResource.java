@@ -47,7 +47,7 @@ public class ImageResource {
 		if(!IMAGE_DIR.exists()){
 			IMAGE_DIR.mkdirs();
 		}
-		File _temp = File.createTempFile("activities-", ".png",IMAGE_TEMP_DIR);
+		File _temp = File.createTempFile("activities-", ".png",IMAGE_DIR);
 		ByteSink bs = Files.asByteSink(_temp);
 		InputStream input = part.getEntityAs(InputStream.class);
 		bs.writeFrom(input);
