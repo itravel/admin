@@ -15,6 +15,17 @@ angular.module('admin')
 
                 return d.promise;
             },
+            lockLvye:function(lvyeId,editor){
+            	 var d = $q.defer();
+            	 
+                 LvyeActivityDao.update({'lvyeId':lvyeId,'editor':editor}).success(function(data){
+                     d.resolve(data);
+                 }).error(function(data){
+                     d.reject(data);
+                 });
+
+                 return d.promise;
+            },
             getTags:function(){
             	 var d = $q.defer();
 
@@ -26,10 +37,9 @@ angular.module('admin')
 
                  return d.promise;
             },
-            saveActivity:function(activity){
+            startLvyeEdit:function(lvyeId,editor){
             	var d = $q.defer();
-            	LvyeActivityDao.saveEdit(activity).success(function(data){
-            		alert("保存成功")
+            	LvyeActivityDao.update({'id':lvyeId,'editor':editor,'status':1}).success(function(data){
                     d.resolve(data);
                 }).error(function(data){
                 	alert(data)
@@ -38,6 +48,30 @@ angular.module('admin')
 
                 return d.promise;
             	
+            },
+            cancelLvyeEdit:function(lvyeId,editor){
+            	var d = $q.defer();
+            	LvyeActivityDao.update({'id':lvyeId,'editor':editor,'status':0}).success(function(data){
+                    d.resolve(data);
+                }).error(function(data){
+                	alert(data)
+                    d.reject(data);
+                });
+
+                return d.promise;
+
+            },
+            completeLvyeEdit:function(lvyeId,editor){
+            	var d = $q.defer();
+            	LvyeActivityDao.update({'id':lvyeId,'editor':editor,'status':4}).success(function(data){
+                    d.resolve(data);
+                }).error(function(data){
+                	alert(data)
+                    d.reject(data);
+                });
+
+                return d.promise;
+
             },
             saveActivity1:function(activity){
             	var d = $q.defer();

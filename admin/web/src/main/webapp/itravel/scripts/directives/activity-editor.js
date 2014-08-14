@@ -7,10 +7,12 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 		scope : {
 			ngModel : '=',
 			activity:'&',
-			url:'='
+			url:'=',
+			editable:'='
 		},
 		controller : function($scope, $element) {
 			$scope.tags={};
+			$scope.disabled = true;
 			AdminService.getTags().then(function(data) {
 
 				angular.forEach(data, function(value) {
@@ -22,7 +24,6 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 				})
 			});
 			$scope.$watch('ngModel',function(newVal,oldVal,scope){
-				console.log(newVal);
 				if(newVal){
 					scope.activity = newVal;
 				}
@@ -40,9 +41,10 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 					
 				})
 			});
-			
+			$scope.isDisabled = function() {
+				return !($scope.activity.editing===true);
+			}
 			$scope.$watchCollection('ngModel.images',function(){
-				console.log("-----")
 			});
 			$scope.clear = function() {
 				$scope.ngModel = {};

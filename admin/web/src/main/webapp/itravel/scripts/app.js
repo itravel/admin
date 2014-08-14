@@ -11,7 +11,8 @@ adminModule.constant('serviceUrl',{
     tag: "/admin/services/tags/",
     category: "/admin/services/tags/categories/",
     lvye: "/admin/services/lvye_activity",
-    lvyeUnedit: '/admin/services/lvye_activity/unedit'
+    lvyeUnedit: '/admin/services/lvye_activity/unedit',
+    lvyeLock:'/admin/services/lvye_activity/lock'
 	
 });
 adminModule.controller('ActivitiesCtrl',

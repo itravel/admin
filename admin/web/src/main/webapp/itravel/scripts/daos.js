@@ -16,8 +16,18 @@ angular.module('admin')
                 url: serviceUrl.lvye
             });
         },
+        update:function(data) {
+        	console.log($.param(data))
+        	return $http({
+                method: 'PUT',
+                url: serviceUrl.lvye+"/"+data.id,
+                data: $.param(data),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+        },
         getUnedit:function(offset,num){
-        	console.log(offset)
         	return $http({
                 method: 'GET',
                 url: serviceUrl.lvyeUnedit,

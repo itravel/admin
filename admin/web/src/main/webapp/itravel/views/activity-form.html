@@ -2,8 +2,8 @@
 	<input type="hidden" ng-model="activity.images">
 	<div class="row form-group">
 		<div class="col-lg-12">
-			<label>标题 </label> <input class="form-control"
-				ng-model="activity.title" required>
+			<label>标题 </label> <input class="form-control" ng-disabled="isDisabled()"
+				ng-model="activity.title" required >
 		</div>
 	</div>
 	
@@ -18,8 +18,8 @@
 		<div class="col-md-12">
 
 			<label>活动介绍</label>
-			<textarea rows="15" class="form-control" placeholder="活动介绍"
-				ng-model="activity.content" required>
+			<textarea ng-disabled="isDisabled()" rows="15" class="form-control" placeholder="活动介绍"
+				ng-model="activity.content" required >
   									</textarea>
 			<p class="help-block">填入活动详细内容.</p>
 
@@ -33,7 +33,7 @@
 				<span class="input-group-addon">开始</span>
 				<div class="input-append date" data-date="12-02-2012"
 					data-date-format="yyyy-mm-dd">
-					<input class="form-control span2" b-datepicker
+					<input ng-disabled="isDisabled()" class="form-control span2" b-datepicker
 						placeholder="startTime" ng-model="activity.startTime" type="text"
 						id="startTime" required>
 				</div>
@@ -46,7 +46,7 @@
 				<span class="input-group-addon">结束</span>
 				<div class="input-append date" data-date="12-02-2012"
 					data-date-format="yyyy-mm-dd">
-					<input class="form-control span2" b-datepicker
+					<input ng-disabled="isDisabled()" class="form-control span2" b-datepicker
 						placeholder="endTime" ng-model="activity.endTime" type="text"
 						id="endTime" required>
 				</div>
@@ -58,7 +58,8 @@
 	<div class="row form-group">
 		<div class="col-lg-12">
 			<div class="input-group">
-				<span class="input-group-addon">出发地</span> <input
+				<span class="input-group-addon">出发地</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="多个出发地，以逗号分隔"
 					ng-model="activity.depart" type="text" id="from" required>
 
@@ -69,7 +70,8 @@
 	<div class="row form-group">
 		<div class="col-lg-12">
 			<div class="input-group">
-				<span class="input-group-addon">目的地</span> <input
+				<span class="input-group-addon">目的地</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="多个目的地以逗号分隔"
 					ng-model="activity.destination" type="text" id="to" required>
 
@@ -79,7 +81,8 @@
 	<div class="row form-group">
 		<div class="col-lg-12">
 			<div class="input-group">
-				<span class="input-group-addon">景点</span> <input
+				<span class="input-group-addon">景点</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="多个景点用逗号分隔"
 					ng-model="activity.scenerySpot" type="text" id="senerySpot">
 
@@ -90,7 +93,7 @@
 	<div class="row form-group">
 		<div class="col-lg-6">
 			<div class="input-group">
-				<span class="input-group-addon">参与方式</span> <select
+				<span class="input-group-addon">参与方式</span> <select ng-disabled="isDisabled()"
 					class="form-control" placeholder="type" ng-model="activity.type">
 					<option value="1">免费</option>
 					<option value="2" selected>预定</option>
@@ -99,7 +102,7 @@
 		</div>
 		<div class="col-lg-6">
 			<div class="input-group">
-				<span class="input-group-addon">规模</span> <select
+				<span class="input-group-addon">规模</span> <select ng-disabled="isDisabled()"
 					class="form-control" placeholder="scale" ng-model="activity.scale">
 					<option value="16" selected>大型(500人以上)</option>
 					<option value="8" selected>中型(50-500人)</option>
@@ -112,7 +115,8 @@
 	<div class="row form-group">
 		<div class="col-lg-4">
 			<div class="input-group">
-				<span class="input-group-addon">人气</span> <input
+				<span class="input-group-addon">人气</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="满分10分"
 					ng-model="activity.popularity" type="text" id="">
 
@@ -121,7 +125,8 @@
 
 		<div class="col-lg-4">
 			<div class="input-group">
-				<span class="input-group-addon">独特性</span> <input
+				<span class="input-group-addon">独特性</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="满分10分"
 					ng-model="activity.originality" type="text" id="">
 			</div>
@@ -129,7 +134,8 @@
 
 		<div class="col-lg-4">
 			<div class="input-group">
-				<span class="input-group-addon">交通</span> <input
+				<span class="input-group-addon">交通</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="满分10分"
 					ng-model="activity.convenience" type="text" id="">
 
@@ -142,7 +148,8 @@
 	<div class="row form-group">
 		<div class="col-lg-6">
 			<div class="input-group">
-				<span class="input-group-addon">主办方</span> <input
+				<span class="input-group-addon">主办方</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="" ng-model="activity.sponsor"
 					type="text" id="">
 
@@ -150,7 +157,8 @@
 		</div>
 		<div class="col-lg-6">
 			<div class="input-group">
-				<span class="input-group-addon">推荐者</span> <input
+				<span class="input-group-addon">推荐者</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="" ng-model="activity.recommender"
 					type="text" id="">
 
@@ -161,7 +169,8 @@
 	<div class="row form-group">
 		<div class="col-lg-12">
 			<div class="input-group">
-				<span class="input-group-addon">联系方式</span> <input
+				<span class="input-group-addon">联系方式</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="联系方式" ng-model="activity.contact"
 					type="text" id="">
 
@@ -171,7 +180,8 @@
 	<div class="row form-group">
 		<div class="col-lg-12">
 			<div class="input-group">
-				<span class="input-group-addon">网址</span> <input
+				<span class="input-group-addon">网址</span> 
+				<input ng-disabled="isDisabled()"
 					class="form-control" placeholder="网址" ng-model="activity.web"
 					type="text" id="">
 
@@ -183,7 +193,7 @@
 		<div class="col-lg-12">
 
 			<div class="checkbox" ng-repeat="(key,tag) in tags">
-				<label> <input type="checkbox" name="tags"
+				<label> <input ng-disabled="isDisabled()" type="checkbox" name="tags"
 					ng-model="tag.selected" value="{{tag.id}}"> {{tag.tag}}
 				</label>
 			</div>
@@ -192,10 +202,10 @@
 
 	<div class="row form-group">
 		<div class="col-lg-12">
-			<button type="reset" class="btn btn-default"
+			<button type="reset" class="btn btn-default" ng-disabled="isDisabled()"
 				ng-click="clear()">清除</button>
 			<button type="submit" class="btn btn-primary"
-				ng-disabled="userForm.$invalid">保存</button>
+				ng-disabled="isDisabled()" >保存</button>
 		</div>
 	</div>
 

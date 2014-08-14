@@ -4,7 +4,7 @@ angular.module('admin')
 	['$scope', '$location', '$routeParams', 'AdminService',
 	 	function($scope, $location, $routeParams, AdminService) {
 			$scope.query_param = {"start": 0,"num": 1}
-			$scope.activity = {'tags':[],'images':[]};
+			$scope.activity = {'tags':[],'images':[],'editing':true};
 			$scope.activities = [];
 			$scope.tags={};
 		    $scope.uploaded_images = [];
@@ -50,11 +50,36 @@ angular.module('admin')
 		        $scope.activity.lvyeId = lvye_activity.id;
 		        $scope.activity.web = lvye_activity.url;
 		        $scope.activity.content = lvye_activity.content;
+		        $scope.activity.editing=false;
 		    };
 		    $scope.$on("saveActivity",function(d,data){
-		    	AdminService.saveActivity($scope.activity);
-		    	console.log("------`")
+		    	AdminService.completeLvyeEdit($scope.activity);
 		    });
+		    $scope.toggleEdit = function (){
+		    	if($scope.activity.editing === true){
+		    		AdminService.cancelLvyeEdit($scope.activity.lvyeId,'x').then(function(data){
+			    		$scope.activity.editing = false;
+			    	},function(data){
+			    		alert("has been lock by others")
+			    	});
+		    	}
+		    	else {
+		    		AdminService.startLvyeEdit($scope.activity.lvyeId,'x').then(function(data){
+		    			$scope.activity.editing = true;
+		    		},function(data){
+		    			alert("has been lock by others")
+		    		});
+		    	}
+		    }
+		    
+		    $scope.showToggleEdit = function(){
+		    	if($scope.activity.editing === false){
+		    		return "编辑"
+		    	}
+		    	else {
+		    		return "取消编辑"
+		    	}
+		    }
 		   
 		}	
 	]

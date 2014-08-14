@@ -1,5 +1,6 @@
 package com.itravel.admin.dal.managers;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -61,6 +62,19 @@ public class LvyeDataManager {
 	public List<LvyeActivity> getUnEditPart(int offset,int limit){
 		EntityManager manager = emf.createEntityManager();
 		List<LvyeActivity> activities = manager.createQuery("select L from LvyeActivity L where L.editStatus = 0 order by L.id",LvyeActivity.class).setFirstResult(offset).setMaxResults(limit).getResultList();
+		manager.close();
+		return activities;
+	}
+	/**
+	 * 获取有效时间的未编辑数据
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	
+	public List<LvyeActivity> getValidUnEditPart(int offset,int limit){
+		EntityManager manager = emf.createEntityManager();
+		List<LvyeActivity> activities = manager.createNativeQuery("select * from lvye_activity where STR_TO_DATE(end_time, '%Y年%c月%e日') > ?end and edit_status = 0 order by id", LvyeActivity.class).setParameter("end", new Date()).setFirstResult(offset).setMaxResults(limit).getResultList();
 		manager.close();
 		return activities;
 	}
