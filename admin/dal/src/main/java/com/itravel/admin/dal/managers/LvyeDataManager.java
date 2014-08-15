@@ -2,11 +2,13 @@ package com.itravel.admin.dal.managers;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.google.common.base.Joiner;
 import com.itravel.admin.dal.entities.LvyeActivity;
 
 public class LvyeDataManager {
@@ -72,9 +74,9 @@ public class LvyeDataManager {
 	 * @return
 	 */
 	
-	public List<LvyeActivity> getValidUnEditPart(int offset,int limit){
+	public List<LvyeActivity> getValidUnEditPart(int offset,int limit,Set<Long> editings){
 		EntityManager manager = emf.createEntityManager();
-		List<LvyeActivity> activities = manager.createNativeQuery("select * from lvye_activity where STR_TO_DATE(end_time, '%Y年%c月%e日') > ?end and edit_status = 0 order by id", LvyeActivity.class).setParameter("end", new Date()).setFirstResult(offset).setMaxResults(limit).getResultList();
+		List<LvyeActivity> activities = manager.createNativeQuery("select * from lvye_activity where STR_TO_DATE(end_time, '%Y年%c月%e日') > ?end and edit_status = 0 and id not in (?editings) order by id", LvyeActivity.class).setParameter("editings", Joiner.on(",").join(editings)).setParameter("end", new Date()).setFirstResult(offset).setMaxResults(limit).getResultList();
 		manager.close();
 		return activities;
 	}
