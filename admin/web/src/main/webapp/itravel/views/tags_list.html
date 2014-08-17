@@ -55,6 +55,7 @@
 							<th>标签</th>
 							<th>类目ID</th>
 							<th>类目文本</th>
+							<th>操作</th>
 
 						</tr>
 					</thead>
@@ -64,6 +65,7 @@
 							<td>{{tag.tag}}</td>
 							<td>{{tag.category.id}}</td>
 							<td>{{tag.category.category}}</td>
+							<td><button class="btn btn-primary" ng-click="deleteTag(tag)">删除</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -106,6 +108,7 @@
 						<tr>
 							<th>#</th>
 							<th>类目文本</th>
+							<th>操作</th>
 
 						</tr>
 					</thead>
@@ -113,6 +116,7 @@
 						<tr ng-repeat="tagCategory in tagCategories" ng-click="saveTagCategory(tagCategory)">
 							<td>{{tagCategory.id}}</td>
 							<td>{{tagCategory.category}}</td>
+							<td><button class="btn btn-primary" ng-click="deleteTagCategory(tagCategory)">删除</button></td>
 						</tr>
 					</tbody>
 				</table>

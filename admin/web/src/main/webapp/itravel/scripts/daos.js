@@ -72,6 +72,12 @@ angular.module('admin')
                 method: 'GET',
                 url: serviceUrl.tag+'/' + id
             });
+        },
+        remove:function(id) {
+        	return $http({
+                method: 'DELETE',
+                url: serviceUrl.tag+'/' + id
+            });
         }
     };
 }])
@@ -89,6 +95,15 @@ angular.module('admin')
         get: function (id) {
             return $http({
                 method: 'GET',
+                url: serviceUrl.category+'/' + id
+            });
+        },
+        remove:function(id){
+        	return $http({
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
                 url: serviceUrl.category+'/' + id
             });
         }

@@ -1,6 +1,6 @@
 
 angular.module('admin')
-    .factory('AdminService', ['$q', 'LvyeActivityDao','ActivityDao','TagDao', function ($q, LvyeActivityDao,ActivityDao,TagDao) {
+    .factory('AdminService', ['$q', 'LvyeActivityDao','ActivityDao','TagDao','TagCategoryDao', function ($q, LvyeActivityDao,ActivityDao,TagDao,TagCategoryDao) {
 
         return {
 
@@ -111,6 +111,26 @@ angular.module('admin')
             	var d = $q.defer();
 
                 ActivityDao.list(start,15).success(function(data){
+                    d.resolve(data);
+                }).error(function(data){
+                    d.reject(data);
+                });
+                return d.promise;
+            },
+            deleteTagCategory:function(tagCategory){
+            	var d = $q.defer();
+
+            	TagCategoryDao.remove(tagCategory.id).success(function(data){
+                    d.resolve(data);
+                }).error(function(data){
+                    d.reject(data);
+                });
+                return d.promise;
+            },
+            deleteTag:function(tag){
+            	var d = $q.defer();
+
+            	TagDao.remove(tag.id).success(function(data){
                     d.resolve(data);
                 }).error(function(data){
                     d.reject(data);

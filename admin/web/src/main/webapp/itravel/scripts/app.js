@@ -8,8 +8,8 @@ var services = {
 var adminModule = angular.module('admin', ['ngRoute', 'blueimp.fileupload']);
 adminModule.constant('serviceUrl',{
 	activities: "/admin/services/activities/",
-    tag: "/admin/services/tags/",
-    category: "/admin/services/tags/categories/",
+    tag: "/admin/services/tags",
+    category: "/admin/services/tags/categories",
     lvye: "/admin/services/lvye_activity",
     lvyeUnedit: '/admin/services/lvye_activity/unedit',
     lvyeLock:'/admin/services/lvye_activity/lock'
@@ -150,7 +150,7 @@ function() {
     };
 })
 
-adminModule.controller('TagCtrl',
+/*adminModule.controller('TagCtrl',
 function($scope, $http) {
     $http.get(services.tag).success(function(data) {
         $scope.tags = data;
@@ -199,7 +199,7 @@ function($scope, $http) {
         $scope.tagCategory = null
     }
 
-})
+})*/
 
 adminModule.config(['$routeProvider',
 function($routeProvider) {
