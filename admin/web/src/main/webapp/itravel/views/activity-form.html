@@ -179,12 +179,13 @@
 
 			<div class="row form-group">
 				<div class="col-lg-12">
-
-					<div class="checkbox" ng-repeat="(key,tag) in tags">
-						<label> <input ng-disabled="isDisabled()" type="checkbox"
-							name="tags" ng-model="tag.selected" value="{{tag.id}}">
-							{{tag.tag}}
-						</label>
+					<div class="row">
+						<div class="checkbox col-lg-4" ng-repeat="tag in getTags()" >
+							<label> <input ng-disabled="isDisabled()" type="checkbox"
+								name="tags" ng-model="tag.selected" value="{{tag.id}}">
+								{{tag.tag}}
+							</label>
+						</div>
 					</div>
 				</div>
 			</div>

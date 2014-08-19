@@ -28,7 +28,7 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 					scope.activity = newVal;
 				}
 			});
-			$scope.$watch('ngModel.tags',function(newVal, oldVal, scope) {
+			/*$scope.$watch('ngModel.tags',function(newVal, oldVal, scope) {
 				
 				if(!newVal){
 					return;
@@ -40,7 +40,7 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 					
 					
 				})
-			});
+			});*/
 			$scope.isDisabled = function() {
 				return !($scope.activity.editing===true);
 			}
@@ -67,6 +67,18 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 				console.debug(newActivity);
 				AdminService.saveActivity1(newActivity);
 
+			};
+			// 获取活动的TAG
+			$scope.getTags = function(){
+				/*if($scope.activity.tags){
+					
+					var activityTags = $scope.activity.tags.split(",")
+					angular.forEach(activityTags,function(item){
+						console.log(item)
+					});
+				}*/
+				console.log("------1")
+				return $scope.tags;
 			};
 		}
 

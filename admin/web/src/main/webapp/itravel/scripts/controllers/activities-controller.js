@@ -24,9 +24,9 @@ angular.module('admin').controller(
 						if(activity.images){
 							$scope.activity.images = activity.images.split(",");
 						}
-						if(activity.tags){
+						/*if(activity.tags){
 							$scope.activity.tags = activity.tags.split(",");
-						}
+						}*/
 					};
 					$scope.prePage = function (){
 						if($scope.currentPage <= 0){
