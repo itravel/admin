@@ -1,6 +1,7 @@
 
 angular.module('admin')
-    .factory('AdminService', ['$q', 'LvyeActivityDao','ActivityDao','TagDao','TagCategoryDao','DoubanActivityDao', function ($q, LvyeActivityDao,ActivityDao,TagDao,TagCategoryDao,DoubanActivityDao) {
+    .factory('AdminService', ['$q', 'ActivityDO','LvyeActivityDao','ActivityDao','TagDao','TagCategoryDao','DoubanActivityDao',
+     function ($q,ActivityDO, LvyeActivityDao,ActivityDao,TagDao,TagCategoryDao,DoubanActivityDao) {
 
         return {
         	/* 绿野数据Service*/
@@ -15,18 +16,6 @@ angular.module('admin')
 
                 return d.promise;
             },
-            /*lockLvye:function(lvyeId,editor){
-            	 var d = $q.defer();
-            	 
-                 LvyeActivityDao.update({'lvyeId':lvyeId,'editor':editor}).success(function(data){
-                     d.resolve(data);
-                 }).error(function(data){
-                     d.reject(data);
-                 });
-
-                 return d.promise;
-            },*/
-           
             startLvyeEdit:function(lvyeId,editor){
             	var d = $q.defer();
             	LvyeActivityDao.update({'id':lvyeId,'editor':editor,'status':1}).success(function(data){
@@ -85,6 +74,10 @@ angular.module('admin')
             	}
 
                 return d.promise;
+            },
+            /*******************活动数据服务*************************/
+            createActivityDO:function(){
+            	return angular.copy(ActivityDO);
             },
             get: function (id) {
                 var d = $q.defer();

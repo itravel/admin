@@ -1,6 +1,5 @@
 package com.itravel.admin.dal.managers;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -10,7 +9,6 @@ import javax.persistence.Persistence;
 
 import com.google.common.base.Joiner;
 import com.itravel.admin.dal.entities.DoubanActivity;
-import com.itravel.admin.dal.entities.LvyeActivity;
 
 public class DoubanDataManager {
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("admin-dal");

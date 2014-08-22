@@ -3,6 +3,7 @@ angular.module('admin')
 	'DoubanActivitiesCtrl',
 	['$scope', '$location', '$routeParams', 'AdminService',
 	 	function($scope, $location, $routeParams, AdminService) {
+			console.log(AdminService.createActivityDO())
 			$scope.query_param = {"start": 0,"num": 1}
 			$scope.activity = {'tags':[],'images':[],'editing':true};
 			$scope.activities = [];
