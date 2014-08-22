@@ -153,3 +153,52 @@ angular.module('admin')
         }
     };
 }]);
+
+/*-------------------豆瓣活动DAO---------------------------------*/
+angular.module('admin')
+.factory('DoubanActivityDao', ['BaseHttp','serviceUrl', function ($http,serviceUrl) {
+    return {
+        list: function () {
+            return $http({
+                method: 'GET',
+                url: serviceUrl.douban
+            });
+        },
+        update:function(data) {
+        	console.log($.param(data))
+        	return $http({
+                method: 'PUT',
+                url: serviceUrl.douban+"/"+data.id,
+                data: $.param(data),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+        },
+        getUnedit:function(offset,num){
+        	return $http({
+                method: 'GET',
+                url: serviceUrl.doubanUnedit,
+                params:{'start':offset,'num':num}
+            });
+        },
+        
+        get: function (id) {
+            return $http({
+                method: 'GET',
+                url: serviceUrl.douban+'/' + id
+            });
+        },
+        saveEdit:function(data){
+        	return $http({
+                method: 'POST',
+                url: serviceUrl.douban+"/"+data.doubanId,
+                data: $.param(data),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                    	
+                }
+            });
+        }
+    };
+}])

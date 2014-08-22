@@ -12,7 +12,10 @@ adminModule.constant('serviceUrl',{
     category: "/admin/services/tags/categories",
     lvye: "/admin/services/lvye_activity",
     lvyeUnedit: '/admin/services/lvye_activity/unedit',
-    lvyeLock:'/admin/services/lvye_activity/lock'
+    lvyeLock:'/admin/services/lvye_activity/lock',
+    douban: '/admin/services/douban',
+    doubanUnedit: '/admin/services/douban/unedit'
+    	
 	
 });
 adminModule.controller('ActivitiesCtrl',
@@ -216,6 +219,11 @@ function($routeProvider) {
     	templateUrl: 'itravel/views/lvye_activity_list.html',
         controller: 'LvyeActivitiesCtrl'
     	
+    })
+    .when('/douban',{
+    	templateUrl: 'itravel/views/douban-activity-list.html',
+    	controller: 'DoubanActivitiesCtrl'
+    		
     });
 
 }]);
