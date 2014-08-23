@@ -40,6 +40,8 @@
 			{{activity.title}} - 活动详情
 			</div>
 			<div class="panel-body">
+				<ng-upload-form url="/admin/services/images/activities"
+					autoUpload="false" size-limit="500000" ng-model="activity"></ng-upload-form>
 				<ng-activity-form ng-model="activity" ></ng-activity-form>
 				
 			</div>

@@ -14,9 +14,17 @@ function() {
         },
 
         controller: function($scope, $element, fileUpload) {
+        	$scope.$watch('ngModel',function(newVal,oldVal){
+        		if(newVal){
+					$scope.activity = newVal;
+				}
+        	})
+        	 $scope.isDisabled = function() {
+ 				return !($scope.activity&&$scope.activity.editing===true);
+ 			};
             $scope.$on('fileuploaddone',
             function(e, data) {
-                $scope.ngModel.images.push(data._response.result.imageNames);
+            	$scope.activity.images.push(data._response.result.imageNames);
             });
 
             $scope.options = {
@@ -73,6 +81,7 @@ function() {
             		$scope.queue.splice(index,1);
             	})
             }
+           
             
         }
     };

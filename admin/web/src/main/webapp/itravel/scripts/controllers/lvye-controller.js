@@ -1,70 +1,46 @@
 angular.module('admin')
 .controller(
 	'LvyeActivitiesCtrl',
-	['$scope', '$location', '$routeParams', 'AdminService',
-	 	function($scope, $location, $routeParams, AdminService) {
-			$scope.query_param = {"start": 0,"num": 1}
-			$scope.activity = {'tags':[],'images':[],'editing':true};
-			$scope.activities = [];
+	['$scope', 'AdminService','LvyeService','TagService',
+	 	function($scope, AdminService,LvyeService,TagService) {
+			TagService.getAll().then(function(data){});
+			$scope.current = 0;
+			$scope.number = 1;
 			$scope.tags={};
 		    $scope.uploaded_images = [];
-		    AdminService.getLvyeUnedit($scope.query_param.start).then(function(data) {
-//		    	$scope.lvye_activities = data;
-		    	$scope.go(data[0]);
+		    LvyeService.getUneditData($scope.current,1).then(function(data) {
+		    	$scope.activity = data;
 			});
-		    AdminService.getTags().then(function(data) {
-
-				angular.forEach(data, function(value) {
-					$scope.tags["'"+value.tag+"'"]={
-							'id' : value.id,
-							'tag' : value.tag,
-							'selected' : 'false'
-						}
-				})
-			});
-		    $scope.pre = function(){
-		    	$scope.query_param.start-=1;
-		    	if($scope.query_param.start<0){
-		    		$scope.query_param.start = 0;
-		    	}
-		    	AdminService.getLvyeUnedit($scope.query_param.start).then(function(data) {
-//			    	 $scope.lvye_activities = data;
-		    		$scope.go(data[0]);
+		    $scope.$on("get",function(d,data){
+		    	LvyeService.getUneditData(data.start,data.num).then(function(data) {
+			    	$scope.activity = data;
 				});
+		    	
+		    })
+		    $scope.pre = function(){
+		    	$scope.current-=1;
+		    	if($scope.current<0){
+		    		$scope.current = 0;
+		    	}
+		    	$scope.$emit("get",{'start':$scope.current,'num':1})
 		    };
 		    $scope.next = function(){
-		    	$scope.query_param.start+=1;
-		    	AdminService.getLvyeUnedit($scope.query_param.start).then(function(data) {
-//			    	 $scope.lvye_activities = data;
-		    		$scope.go(data[0]);
-				});
-		    };
-		    $scope.go = function(lvye_activity) {
-		    	$scope.activity = {'tags':[],'images':[]};
-		        $scope.activity.title = lvye_activity.title;
-		        $scope.activity.startTime = lvye_activity.startTime;
-		        $scope.activity.endTime = lvye_activity.endTime;
-		        $scope.activity.depart= lvye_activity.fromAddress;
-		        $scope.activity.destination = lvye_activity.destinationAddress;
-		        $scope.activity.scenerySpot = lvye_activity.scenic.split(" ").join(",");
-		        $scope.activity.lvyeId = lvye_activity.id;
-		        $scope.activity.web = lvye_activity.url;
-		        $scope.activity.content = lvye_activity.content;
-		        $scope.activity.editing=false;
+		    	$scope.current+=1;
+		    	$scope.$emit("get",{'start':$scope.current,'num':1})
 		    };
 		    $scope.$on("saveActivity",function(d,data){
-		    	AdminService.completeLvyeEdit($scope.activity);
+		    	LvyeService.completedEdit($scope.activity.lvyeId,"");
 		    });
 		    $scope.toggleEdit = function (){
 		    	if($scope.activity.editing === true){
-		    		AdminService.cancelLvyeEdit($scope.activity.lvyeId,'x').then(function(data){
+		    		LvyeService.cancelEdit($scope.activity.lvyeId,'x').then(function(data){
 			    		$scope.activity.editing = false;
 			    	},function(data){
 			    		alert("has been lock by others")
 			    	});
 		    	}
 		    	else {
-		    		AdminService.startLvyeEdit($scope.activity.lvyeId,'x').then(function(data){
+		    		LvyeService.doEdit($scope.activity.lvyeId,'x').then(function(data){
 		    			$scope.activity.editing = true;
 		    		},function(data){
 		    			alert("has been lock by others")
@@ -73,11 +49,11 @@ angular.module('admin')
 		    }
 		    
 		    $scope.showToggleEdit = function(){
-		    	if($scope.activity.editing === false){
-		    		return "编辑"
+		    	if($scope.activity&&$scope.activity.editing === true){
+		    		return "取消编辑"
 		    	}
 		    	else {
-		    		return "取消编辑"
+		    		return "编辑"
 		    	}
 		    }
 		   

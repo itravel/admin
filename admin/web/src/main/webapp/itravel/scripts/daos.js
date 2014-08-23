@@ -17,7 +17,7 @@ angular.module('admin')
             });
         },
         update:function(data) {
-        	console.log($.param(data))
+        	console.log(data)
         	return $http({
                 method: 'PUT',
                 url: serviceUrl.lvye+"/"+data.id,

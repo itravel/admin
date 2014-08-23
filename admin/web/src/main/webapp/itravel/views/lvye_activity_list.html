@@ -12,7 +12,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-bar-chart-o fa-fw"></i> 编辑活动 
-					
+					<a class="form-control-static" href="{{activity.web}}"
+							target="_blank">{{activity.title}}</a>
 					<div class="pull-right btn-group">
 					
 						<button ng-click="toggleEdit()" class="btn btn-primary btn-xs" ><i class="fa fa-pencil"></i>&nbsp; {{showToggleEdit()}}</button>
@@ -21,17 +22,10 @@
 					</div>
 			</div>
 			<div class="panel-body">
+				
 				<ng-upload-form url="/admin/services/images/activities"
 					autoUpload="false" size-limit="500000" ng-model="activity"></ng-upload-form>
-				<div class="row">
-					<label class="col-lg-3 control-label">网址</label>
-					<div class="col-lg-9">
-						<a class="form-control-static" href="{{activity.web}}"
-							target="_blank">{{activity.web}}</a>
-					</div>
-				</div>
-				
-				<ng-activity-form ng-model="activity" tag-list="tags" ></ng-activity-form>
+				<ng-activity-form ng-model="activity" ></ng-activity-form>
 
 			</div>
 		</div>

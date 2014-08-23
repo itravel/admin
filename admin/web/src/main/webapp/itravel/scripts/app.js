@@ -40,17 +40,17 @@ function($scope, $http) {
         $scope.lvye_activities = data;
     });
     
-    $http({
-        method: 'GET',
-        url: services.tag
-    }).success(function(data) {
-        $scope.activity.tags = []
-        angular.forEach(data,function(value){
-        	$scope.activity.tags.push({'id':value.id,'tag':value.tag,'selected':'false'})
-        })
-        	
-        
-    });
+//    $http({
+//        method: 'GET',
+//        url: services.tag
+//    }).success(function(data) {
+//        $scope.activity.tags = []
+//        angular.forEach(data,function(value){
+//        	$scope.activity.tags.push({'id':value.id,'tag':value.tag,'selected':'false'})
+//        })
+//        	
+//        
+//    });
     
     $scope.save = function(activity) {
     	console.log(activity);

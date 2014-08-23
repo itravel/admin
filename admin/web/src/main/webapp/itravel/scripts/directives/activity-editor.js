@@ -1,5 +1,6 @@
-angular.module('admin').directive('ngActivityForm', ['AdminService', function(AdminService) {
-
+angular.module('admin').directive('ngActivityForm', ['AdminService','TagService', 
+    function(AdminService,TagService) {
+	
 	return {
 		restrict : 'ACEM',
 		templateUrl : 'itravel/views/activity-form.html',
@@ -8,41 +9,48 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 			ngModel : '=',
 			activity:'&',
 			url:'=',
-			editable:'='
+			editable:'=',
 		},
+		
 		controller : function($scope, $element) {
-			$scope.tags={};
+			
 			$scope.disabled = true;
-			AdminService.getTags().then(function(data) {
-
-				angular.forEach(data, function(value) {
-					$scope.tags["'"+value.tag+"'"]={
-							'id' : value.id,
-							'tag' : value.tag,
-							'selected' : 'false'
-						}
-				})
-			});
 			$scope.$watch('ngModel',function(newVal,oldVal,scope){
 				if(newVal){
 					scope.activity = newVal;
 				}
-			});
-			/*$scope.$watch('ngModel.tags',function(newVal, oldVal, scope) {
-				
-				if(!newVal){
-					return;
-				}
-				angular.forEach(newVal,function(value){
-					if(scope.tags["'"+value+"'"]){
-						scope.tags["'"+value+"'"].selected=true;
+				// 获取活动的TAG
+				if($scope.TAGS){
+					$scope.tags = angular.copy($scope.TAGS);
+					if(scope.activity.tags){
+						angular.forEach(scope.activity.tags,function(item){
+							if($scope.tags[""+item]){
+								$scope.tags[""+item].selected = true;
+							}
+						});
 					}
+				}
+				else {
+					TagService.getAll().then(function(data){
+						$scope.TAGS=data;
+						$scope.tags = angular.copy($scope.TAGS);
+						if(scope.activity.tags){
+							angular.forEach(scope.activity.tags,function(item){
+								if($scope.tags[""+item]){
+									$scope.tags[""+item].selected = true;
+								}
+							});
+						}
 					
+					})
 					
-				})
-			});*/
+						
+					
+				}
+				
+			});
 			$scope.isDisabled = function() {
-				return !($scope.activity.editing===true);
+				return !($scope.activity&&$scope.activity.editing===true);
 			}
 			$scope.$watchCollection('ngModel.images',function(){
 			});
@@ -68,18 +76,8 @@ angular.module('admin').directive('ngActivityForm', ['AdminService', function(Ad
 				AdminService.saveActivity1(newActivity);
 
 			};
-			// 获取活动的TAG
-			$scope.getTags = function(){
-				/*if($scope.activity.tags){
-					
-					var activityTags = $scope.activity.tags.split(",")
-					angular.forEach(activityTags,function(item){
-						console.log(item)
-					});
-				}*/
-				console.log("------1")
-				return $scope.tags;
-			};
+
+			
 		}
 
 	}
