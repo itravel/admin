@@ -7,6 +7,8 @@ angular.module('admin').factory('ActivityDO', function() {
 				"gmt_modified" : "",
 				"title" : "",
 				"content" : "",
+				"journey":"",
+				"tips":"",
 				"startTime" : "",
 				"endTime" : "",
 				"depart" : "",

@@ -15,6 +15,9 @@ angular.module('admin').factory('LvyeService',function($q,LvyeActivityDao,Activi
         return transformed;
 	}
 	return {
+		transform:function(lvyeActivity){
+			return transform(lvyeActivity);
+		},
 		getUneditData:function(start){
 			 var d = $q.defer();
 

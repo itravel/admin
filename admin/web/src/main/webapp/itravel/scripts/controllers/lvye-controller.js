@@ -5,19 +5,37 @@ angular.module('admin')
 	 	function($scope, AdminService,LvyeService,TagService) {
 			TagService.getAll().then(function(data){});
 			$scope.current = 0;
-			$scope.number = 1;
+			$scope.number = 6;
 			$scope.tags={};
 		    $scope.uploaded_images = [];
-		    LvyeService.getUneditData($scope.current,1).then(function(data) {
+		    /*LvyeService.getUneditData($scope.current,1).then(function(data) {
 		    	$scope.activity = data;
+			});*/
+		    LvyeService.getUneditDataPage($scope.current,$scope.number).then(function(data) {
+		    	$scope.activities = data;
 			});
+		    $scope.detail = function(lvyeActivity){
+		    	$scope.activity = LvyeService.transform(lvyeActivity);
+		    };
 		    $scope.$on("get",function(d,data){
-		    	LvyeService.getUneditData(data.start,data.num).then(function(data) {
-			    	$scope.activity = data;
+		    	LvyeService.getUneditDataPage(data.start,data.num).then(function(data) {
+			    	$scope.activities = data;
 				});
 		    	
-		    })
-		    $scope.pre = function(){
+		    });
+		    
+		    $scope.prePage = function (){
+		    	$scope.current-=$scope.number;
+		    	if($scope.current<0){
+		    		$scope.current = 0;
+		    	}
+		    	$scope.$emit("get",{'start':$scope.current,'num':$scope.number})
+			};
+			$scope.nextPage = function() {
+				$scope.current+=$scope.number;
+		    	$scope.$emit("get",{'start':$scope.current,'num':$scope.number})
+			}
+		   /* $scope.pre = function(){
 		    	$scope.current-=1;
 		    	if($scope.current<0){
 		    		$scope.current = 0;
@@ -27,7 +45,7 @@ angular.module('admin')
 		    $scope.next = function(){
 		    	$scope.current+=1;
 		    	$scope.$emit("get",{'start':$scope.current,'num':1})
-		    };
+		    };*/
 		    $scope.$on("saveActivity",function(d,data){
 		    	LvyeService.completedEdit($scope.activity.lvyeId,"");
 		    });

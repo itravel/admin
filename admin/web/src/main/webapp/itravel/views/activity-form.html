@@ -1,213 +1,230 @@
 
-<form role="form" name="activityForm" ng-submit="save(activity)">
-	<div class="row">
-			<input type="hidden" ng-model="activity.images">
-		<div class="col-lg-6">
-			<div class="row form-group">
-				<div class="col-lg-12">
-					<label>标题 </label> <input class="form-control"
-						ng-disabled="isDisabled()" ng-model="activity.title" required>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-lg-12">
-					<label>图片 </label> <input class="form-control"
-						value="{{activity.images}}" required disabled>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-lg-6">
-					<div class="input-group">
-						<span class="input-group-addon">开始</span>
-						<div class="input-append date" data-date="12-02-2012"
-							data-date-format="yyyy-mm-dd">
-							<input ng-disabled="isDisabled()" class="form-control span2"
-								b-datepicker placeholder="startTime"
-								ng-model="activity.startTime" type="text" id="startTime"
-								required>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-lg-6">
-					<div class="input-group">
-						<span class="input-group-addon">结束</span>
-						<div class="input-append date" data-date="12-02-2012"
-							data-date-format="yyyy-mm-dd">
-							<input ng-disabled="isDisabled()" class="form-control span2"
-								b-datepicker placeholder="endTime" ng-model="activity.endTime"
-								type="text" id="endTime" required>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-lg-12">
-					<div class="input-group">
-						<span class="input-group-addon">出发地</span> <input
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="多个出发地，以逗号分隔" ng-model="activity.depart" type="text"
-							id="from" required>
-
-					</div>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-lg-12">
-					<div class="input-group">
-						<span class="input-group-addon">目的地</span> <input
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="多个目的地以逗号分隔" ng-model="activity.destination"
-							type="text" id="to" required>
-
-					</div>
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-lg-12">
-					<div class="input-group">
-						<span class="input-group-addon">景点</span> <input
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="多个景点用逗号分隔" ng-model="activity.scenerySpot"
-							type="text" id="senerySpot">
-
-					</div>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-lg-6">
-					<div class="input-group">
-						<span class="input-group-addon">参与方式</span> <select
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="type" ng-model="activity.type">
-							<option value="1">免费</option>
-							<option value="2" selected>预定</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="input-group">
-						<span class="input-group-addon">规模</span> <select
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="scale" ng-model="activity.scale">
-							<option value="16" selected>大型(500人以上)</option>
-							<option value="8" selected>中型(50-500人)</option>
-							<option value="4" selected>小型(50人以下)</option>
-						</select>
-					</div>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-lg-4">
-					<div class="input-group">
-						<span class="input-group-addon">人气</span> <input
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="满分10分" ng-model="activity.popularity" type="text"
-							id="">
-
-					</div>
-				</div>
-
-				<div class="col-lg-4">
-					<div class="input-group">
-						<span class="input-group-addon">独特性</span> <input
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="满分10分" ng-model="activity.originality" type="text"
-							id="">
-					</div>
-				</div>
-
-				<div class="col-lg-4">
-					<div class="input-group">
-						<span class="input-group-addon">交通</span> <input
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="满分10分" ng-model="activity.convenience" type="text"
-							id="">
-
-					</div>
-				</div>
-
-			</div>
-
-
-			<div class="row form-group">
-				<div class="col-lg-6">
-					<div class="input-group">
-						<span class="input-group-addon">主办方</span> <input
-							ng-disabled="isDisabled()" class="form-control" placeholder=""
-							ng-model="activity.sponsor" type="text" id="">
-
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="input-group">
-						<span class="input-group-addon">推荐者</span> <input
-							ng-disabled="isDisabled()" class="form-control" placeholder=""
-							ng-model="activity.recommender" type="text" id="">
-
-					</div>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-lg-12">
-					<div class="input-group">
-						<span class="input-group-addon">联系方式</span> <input
-							ng-disabled="isDisabled()" class="form-control"
-							placeholder="联系方式" ng-model="activity.contact" type="text" id="">
-
-					</div>
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-lg-12">
-					<div class="input-group">
-						<span class="input-group-addon">网址</span> <input
-							ng-disabled="isDisabled()" class="form-control" placeholder="网址"
-							ng-model="activity.web" type="text" id="">
-
-					</div>
-				</div>
-			</div>
-
-			<div class="row form-group">
-				<div class="col-lg-12">
-					<div class="row">
-						<div class="checkbox col-lg-4" ng-repeat="tag in tags" >
-							<label> <input ng-disabled="isDisabled()" type="checkbox"
-								name="tags" ng-model="tag.selected" value="{{tag.id}}">
-								{{tag.tag}}
-							</label>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-		</div>
-		<div class="col-lg-6">
-			<div class="row form-group">
-				<div class="col-md-12">
-
-					<label>活动介绍</label>
-					<textarea ng-disabled="isDisabled()" rows="35" class="form-control"
-						placeholder="活动介绍" ng-model="activity.content" required>
-  									</textarea>
-					<p class="help-block">填入活动详细内容.</p>
-
-				</div>
-			</div>
-
+<form role="form" name="abcd" ng-submit="save(activity)" >
+	<input type="hidden" ng-model="activity.images">
+	<accordion close-others="oneAtATime">
+	<accordion-group is-open="true">
+	<accordion-heading ><i class="fa fa-star " style="color:darkorange"></i> 必填类容</accordion-heading> 
+	<accordion-body>
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<label class="text-overflow:ellipsis;white-space:nowrap;overflow:hidden;"> <i class="fa fa-star " style="color:darkorange"></i> 标题 </label> <input class="form-control"
+				ng-disabled="isDisabled()" ng-model="activity.title" required>
 		</div>
 	</div>
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<label> <i class="fa fa-star " style="color:darkorange"></i> 图片 </label> <input class="form-control"
+				value="{{activity.images}}" required disabled>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-star " style="color:darkorange"></i> 开始</span>
+				<div class="input-append date" data-date="12-02-2012"
+					data-date-format="yyyy-mm-dd">
+					<input ng-disabled="isDisabled()" class="form-control span2"
+						b-datepicker placeholder="startTime" ng-model="activity.startTime"
+						type="text" id="startTime" required>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-star " style="color:darkorange"></i> 结束</span>
+				<div class="input-append date" data-date="12-02-2012"
+					data-date-format="yyyy-mm-dd">
+					<input ng-disabled="isDisabled()" class="form-control span2"
+						b-datepicker placeholder="endTime" ng-model="activity.endTime"
+						type="text" id="endTime" required>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row form-group">
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-star " style="color:darkorange"></i> 出发地</span> <input
+					ng-disabled="isDisabled()" class="form-control"
+					placeholder="多个出发地，以逗号分隔" ng-model="activity.depart" type="text"
+					id="from" required>
+
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-star " style="color:darkorange"></i> 目的地</span> <input
+					ng-disabled="isDisabled()" class="form-control"
+					placeholder="多个目的地以逗号分隔" ng-model="activity.destination"
+					type="text" id="to" required>
+
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-star " style="color:darkorange"></i> 景点</span> <input
+					ng-disabled="isDisabled()" class="form-control"
+					placeholder="多个景点用逗号分隔" ng-model="activity.scenerySpot" type="text"
+					id="senerySpot">
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-star " style="color:darkorange"></i> 联系方式</span> <input
+					ng-disabled="isDisabled()" class="form-control" placeholder="联系方式"
+					ng-model="activity.contact" type="text" id="">
+
+			</div>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<tabset> <tab heading="">
+				<tab-heading><i class="fa fa-star " style="color:darkorange"></i> 活动介绍</tab-heading>			
+			<textarea
+				ng-disabled="isDisabled()" rows="15" class="form-control" name="activity_content"
+				placeholder="活动介绍" ng-model="activity.content" required>
+  									</textarea>
+			<p class="help-block">填入活动介绍内容200字以内.</p>
+
+			</tab> <tab heading="行程安排"> <textarea ng-disabled="isDisabled()" name = "activity_journey"
+				rows="25" class="form-control" placeholder="行程安排"
+				ng-model="activity.journey" >
+  									</textarea>
+			<p class="help-block">填入行程安排内容.</p>
+
+			</tab> <tab heading="活动须知"> <textarea ng-disabled="isDisabled()" name = "activity_tips"
+				rows="15" class="form-control" placeholder="活动须知"
+				ng-model="activity.tips" >
+  									</textarea>
+			<p class="help-block">填入活动须知内容.</p>
+
+			</tab> </tabset>
+		</div>
+
+
+	</div>
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<span class="input-group-addon">网址</span> <input
+					ng-disabled="true" class="form-control" placeholder="网址"
+					ng-model="activity.web" type="text" id="">
+
+			</div>
+		</div>
+	</div>
+	</accordion-body> 
+	</accordion-group> 
+	<accordion-group> 
+	<accordion-heading>选填内容 <i class="pull-right glyphicon"
+		ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+	</accordion-heading> 
+	<div class="row form-group">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">主办方</span> <input
+					ng-disabled="isDisabled()" class="form-control" placeholder=""
+					ng-model="activity.sponsor" type="text" id="">
+
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">推荐者</span> <input
+					ng-disabled="isDisabled()" class="form-control" placeholder=""
+					ng-model="activity.recommender" type="text" id="">
+
+			</div>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">参与方式</span> <select
+					ng-disabled="isDisabled()" class="form-control" placeholder="type"
+					ng-model="activity.type">
+					<option value="1">免费</option>
+					<option value="2" selected>预定</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group">
+				<span class="input-group-addon">规模</span> <select
+					ng-disabled="isDisabled()" class="form-control" placeholder="scale"
+					ng-model="activity.scale">
+					<option value="16" selected>大型(500人以上)</option>
+					<option value="8" selected>中型(50-500人)</option>
+					<option value="4" selected>小型(50人以下)</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	
+		<div class="row form-group">
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon">人气</span> <input
+					ng-disabled="isDisabled()" class="form-control" placeholder="满分10分"
+					ng-model="activity.popularity" type="text" id="">
+
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon">独特性</span> <input
+					ng-disabled="isDisabled()" class="form-control" placeholder="满分10分"
+					ng-model="activity.originality" type="text" id="">
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="input-group">
+				<span class="input-group-addon">交通</span> <input
+					ng-disabled="isDisabled()" class="form-control" placeholder="满分10分"
+					ng-model="activity.convenience" type="text" id="">
+
+			</div>
+		</div>
+
+	</div>
+	</accordion-group> </accordion>
+
+
+
+
+
+
+	
+
+	
+
+	<div class="row form-group">
+		<div class="col-lg-12">
+			<div class="row">
+				<div class="checkbox col-lg-4" ng-repeat="tag in tags">
+					<label> <input ng-disabled="isDisabled()" type="checkbox"
+						name="tags" ng-model="tag.selected" value="{{tag.id}}">
+						{{tag.tag}}
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+
 
 
 
