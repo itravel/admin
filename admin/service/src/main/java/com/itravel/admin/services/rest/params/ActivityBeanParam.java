@@ -155,6 +155,12 @@ public class ActivityBeanParam implements Serializable{
 	@FormParam(value="originality")
 	private int originality;
 	
+	@FormParam(value="journey")
+	private String journey;
+	
+	@FormParam(value="tips")
+	private String tips;
+	
 	
 	public boolean validate(){
 		if(StringUtils.isNotEmpty(this.title)
@@ -368,5 +374,21 @@ public class ActivityBeanParam implements Serializable{
 
 	public void setOriginality(int originality) {
 		this.originality = originality;
+	}
+
+	public String getJourney() {
+		return journey;
+	}
+
+	public void setJourney(String journey) {
+		this.journey = journey;
+	}
+
+	public String getTips() {
+		return tips;
+	}
+
+	public void setTips(String tips) {
+		this.tips = tips;
 	}
 }
