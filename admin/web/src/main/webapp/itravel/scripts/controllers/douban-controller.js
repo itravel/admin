@@ -1,18 +1,23 @@
 angular.module('admin')
 .controller(
 	'DoubanActivitiesCtrl',
-	['$scope', '$location', '$routeParams', 'AdminService',
-	 	function($scope, $location, $routeParams, AdminService) {
+	['$scope', '$location', '$routeParams', 'AdminService','DoubanService',
+	 	function($scope, $location, $routeParams, AdminService,DoubanService) {
 			console.log(AdminService.createActivityDO())
 			$scope.query_param = {"start": 0,"num": 1}
-			$scope.activity = {'tags':[],'images':[],'editing':true};
+			$scope.activity = {'tags':[],'images':[],'editing':false};
 			$scope.activities = [];
 			$scope.tags={};
 		    $scope.uploaded_images = [];
-		    AdminService.getDoubanUnedit($scope.query_param.start).then(function(data) {
-//		    	$scope.lvye_activities = data;
-		    	$scope.go(data[0]);
-			});
+		    $scope.current = 0;
+		    $scope.number = 8;
+//		    AdminService.getDoubanUnedit($scope.query_param.start).then(function(data) {
+////		    	$scope.lvye_activities = data;
+//		    	$scope.go(data[0]);
+//			});
+		    DoubanService.getUneditDataPage($scope.current,$scope.number).then(function(data){
+		    	$scope.activities = data;
+		    });
 		    AdminService.getTags().then(function(data) {
 
 				angular.forEach(data, function(value) {
@@ -40,7 +45,25 @@ angular.module('admin')
 		    		$scope.go(data[0]);
 				});
 		    };
-		    $scope.go = function(douban_activity) {
+		    $scope.$on("get",function(d,data){
+		    	DoubanService.getUneditDataPage(data.start,data.num).then(function(data) {
+			    	$scope.activities = data;
+				});
+		    	
+		    });
+		    $scope.prePage = function (){
+		    	$scope.current-=$scope.number;
+		    	if($scope.current<0){
+		    		$scope.current = 0;
+		    	}
+		    	$scope.$emit("get",{'start':$scope.current,'num':$scope.number})
+			};
+			$scope.nextPage = function() {
+				$scope.current+=$scope.number;
+		    	$scope.$emit("get",{'start':$scope.current,'num':$scope.number})
+			};
+			
+		    $scope.detail = $scope.go = function(douban_activity) {
 		    	$scope.activity = {'tags':[],'images':[]};
 		        $scope.activity.title = douban_activity.title;
 		        $scope.activity.startTime = douban_activity.startTime;
