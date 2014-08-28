@@ -37,7 +37,14 @@
 	<div class="col-lg-8">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-			{{activity.title}} - 活动详情
+				<i class="fa fa-bar-chart-o fa-fw"></i> 编辑活动 
+					
+					<div class="pull-right btn-group">
+					
+						<button ng-click="toggleEdit()" class="btn btn-primary btn-xs" ><i class="fa fa-pencil"></i>&nbsp; {{showToggleEdit()}}</button>
+						<button href="#" ng-click="pre()" class="btn btn-default btn-xs"><i class="fa fa-caret-left fa-fw"></i>&nbsp; 上一条</button>
+						<button href="#" ng-click="next()" class="btn btn-default btn-xs"><i class="fa fa-caret-right fa-fw"></i>&nbsp; 下一条</button>
+					</div>
 			</div>
 			<div class="panel-body">
 				<ng-upload-form url="/admin/services/images/activities"

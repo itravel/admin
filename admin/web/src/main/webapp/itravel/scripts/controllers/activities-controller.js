@@ -3,7 +3,7 @@ angular.module('admin').controller(
 		[ '$scope', '$location', '$routeParams', 'AdminService',
 				function($scope, $location, $routeParams, AdminService) {
 					$scope.currentPage = 0;
-					$scope.activity = {};
+					$scope.activity = {'editing':false};
 					$scope.activities = [];
 					$scope.tags={};
 					AdminService.listActivity($scope.currentPage).then(function(data) {
@@ -21,6 +21,7 @@ angular.module('admin').controller(
 //					});
 					$scope.detail = function(activity) {
 						$scope.activity = angular.copy(activity);
+						$scope.activity.editing = false;
 						if(activity.images){
 							$scope.activity.images = activity.images.split(",");
 						}
@@ -47,5 +48,30 @@ angular.module('admin').controller(
 							}
 						});
 					}
+					 $scope.toggleEdit = function (){
+					    	if($scope.activity.editing === true){
+					    		AdminService.cancelDoubanEdit($scope.activity.doubanId,'x').then(function(data){
+						    		$scope.activity.editing = false;
+						    	},function(data){
+						    		alert("has been lock by others")
+						    	});
+					    	}
+					    	else {
+					    		AdminService.startDoubanEdit($scope.activity.doubanId,'x').then(function(data){
+					    			$scope.activity.editing = true;
+					    		},function(data){
+					    			alert("has been lock by others")
+					    		});
+					    	}
+					    }
+					    
+					    $scope.showToggleEdit = function(){
+					    	if($scope.activity.editing === false){
+					    		return "编辑"
+					    	}
+					    	else {
+					    		return "取消编辑"
+					    	}
+					    }
 
 				} ]);
