@@ -9,16 +9,6 @@ angular.module('admin').controller(
 					AdminService.listActivity($scope.currentPage).then(function(data) {
 						$scope.activities = data;
 					});
-//					AdminService.getTags().then(function(data) {
-//
-//						angular.forEach(data, function(value) {
-//							$scope.tags["'"+value.tag+"'"]={
-//									'id' : value.id,
-//									'tag' : value.tag,
-//									'selected' : 'false'
-//								}
-//						})
-//					});
 					$scope.detail = function(activity) {
 						$scope.activity = angular.copy(activity);
 						$scope.activity.editing = false;
@@ -48,30 +38,26 @@ angular.module('admin').controller(
 							}
 						});
 					}
-					 $scope.toggleEdit = function (){
-					    	if($scope.activity.editing === true){
-					    		AdminService.cancelDoubanEdit($scope.activity.doubanId,'x').then(function(data){
-						    		$scope.activity.editing = false;
-						    	},function(data){
-						    		alert("has been lock by others")
-						    	});
-					    	}
-					    	else {
-					    		AdminService.startDoubanEdit($scope.activity.doubanId,'x').then(function(data){
-					    			$scope.activity.editing = true;
-					    		},function(data){
-					    			alert("has been lock by others")
-					    		});
-					    	}
-					    }
+					$scope.toggleEdit = function (){
+				    	if($scope.activity.editing === true){
+				    		$scope.activity.editing = false;
+				    	}
+				    	else {
+				    		$scope.activity.editing = true;
+				    	}
+					};
 					    
-					    $scope.showToggleEdit = function(){
-					    	if($scope.activity.editing === false){
-					    		return "编辑"
-					    	}
-					    	else {
-					    		return "取消编辑"
-					    	}
-					    }
+				    $scope.showToggleEdit = function(){
+				    	if($scope.activity.editing === false){
+				    		return "编辑"
+				    	}
+				    	else {
+				    		return "取消编辑"
+				    	}
+				    };
+				    $scope.$on("saveActivity",function(d,data){
+				    	$scope.activity.editing=false;
+				    });
+					  
 
 				} ]);
