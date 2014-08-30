@@ -32,10 +32,12 @@
 	</div>
 	<span data-ng-repeat="file in queue">
 		<span data-ng-switch data-on="!!file.thumbnailUrl">
-			
-				<span class="preview" data-ng-switch-default
-					data-file-upload-preview="file"></span>
-				<input type="button" ng-click="remove(file)">
+				<span class="preview" 
+					data-ng-switch-default
+					data-file-upload-preview="file">
+					
+				</span>
+				<button type="button" ng-click="remove(file)">删除</button>
 		</span>
 	</span>
 </form>

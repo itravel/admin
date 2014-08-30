@@ -1,16 +1,13 @@
 angular.module('admin')
 .controller(
 	'LvyeActivitiesCtrl',
-	['$scope', 'AdminService','LvyeService','TagService',
+	['$scope', 'AdminService','LvyeService','TagService','ActivityService',
 	 	function($scope, AdminService,LvyeService,TagService) {
 			TagService.getAll().then(function(data){});
 			$scope.current = 0;
 			$scope.number = 6;
 			$scope.tags={};
 		    $scope.uploaded_images = [];
-		    /*LvyeService.getUneditData($scope.current,1).then(function(data) {
-		    	$scope.activity = data;
-			});*/
 		    LvyeService.getUneditDataPage($scope.current,$scope.number).then(function(data) {
 		    	$scope.activities = data;
 			});
@@ -35,19 +32,10 @@ angular.module('admin')
 				$scope.current+=$scope.number;
 		    	$scope.$emit("get",{'start':$scope.current,'num':$scope.number})
 			}
-		   /* $scope.pre = function(){
-		    	$scope.current-=1;
-		    	if($scope.current<0){
-		    		$scope.current = 0;
-		    	}
-		    	$scope.$emit("get",{'start':$scope.current,'num':1})
-		    };
-		    $scope.next = function(){
-		    	$scope.current+=1;
-		    	$scope.$emit("get",{'start':$scope.current,'num':1})
-		    };*/
 		    $scope.$on("saveActivity",function(d,data){
-		    	LvyeService.completedEdit($scope.activity.lvyeId,"");
+		    	$scope.activity.editing=false;
+		    	LvyeService.completedEdit($scope.activity.lvyeId,"").then(function(data){
+		    	});
 		    });
 		    $scope.toggleEdit = function (){
 		    	if($scope.activity.editing === true){

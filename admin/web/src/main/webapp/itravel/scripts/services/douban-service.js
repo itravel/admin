@@ -46,6 +46,17 @@ angular.module('admin').factory('DoubanService',function($q,DoubanActivityDao,Ac
 	
 	        return d.promise;
 	
+	    },
+	    completeEdit:function(doubanId,editor){
+	    	var d = $q.defer();
+	    	DoubanActivityDao.update({'id':doubanId,'editor':editor,'status':4}).success(function(data){
+	            d.resolve(data);
+	        }).error(function(data){
+	        	alert(data)
+	            d.reject(data);
+	        });
+	
+	        return d.promise;
 	    }
 	};
 });

@@ -11,10 +11,6 @@ angular.module('admin')
 		    $scope.uploaded_images = [];
 		    $scope.current = 0;
 		    $scope.number = 8;
-//		    AdminService.getDoubanUnedit($scope.query_param.start).then(function(data) {
-////		    	$scope.lvye_activities = data;
-//		    	$scope.go(data[0]);
-//			});
 		    DoubanService.getUneditDataPage($scope.current,$scope.number).then(function(data){
 		    	$scope.activities = data;
 		    });
@@ -79,7 +75,9 @@ angular.module('admin')
 		        $scope.activity.doubanId = douban_activity.id;
 		    };
 		    $scope.$on("saveActivity",function(d,data){
-		    	//AdminService.completeLvyeEdit($scope.activity);
+		    	$scope.activity.editing=false;
+		    	DoubanService.completeEdit($scope.activity.doubanId,"x");
+		    	
 		    });
 		    $scope.toggleEdit = function (){
 		    	if($scope.activity.editing === true){

@@ -1,5 +1,5 @@
-angular.module('admin').directive('ngActivityForm', ['AdminService','TagService', 
-    function(AdminService,TagService) {
+angular.module('admin').directive('ngActivityForm', ['AdminService','TagService', 'ActivityService',
+    function(AdminService,TagService,ActivityService) {
 	
 	return {
 		restrict : 'ACEM',
@@ -59,9 +59,8 @@ angular.module('admin').directive('ngActivityForm', ['AdminService','TagService'
 			};
 			// 保存到服务器
 			$scope.save = function(activity) {
-				$scope.$emit("saveActivity",true);
+				
 				var newActivity = angular.copy(activity);
-
 				newActivity.images = activity.images.join(",");
 				var selectedTags = [];
 				angular.forEach($scope.tags, function(tag) {
@@ -72,8 +71,27 @@ angular.module('admin').directive('ngActivityForm', ['AdminService','TagService'
 				});
 
 				newActivity.tags = selectedTags.join(",");
-				console.debug(newActivity);
-				AdminService.saveActivity1(newActivity);
+				ActivityService.save(newActivity).then(function(data){
+					$scope.$emit("saveActivity",true);
+					$scope.activity = data;
+					$scope.message = {};
+					$scope.message.success = true;
+					$scope.message.fail = false;
+					$scope.message.content = "保存成功"
+					$element.find('#activityEditModal').modal("show");
+				},function(data){
+					$scope.message = {};
+					$scope.message.success = false;
+					$scope.message.fail = true;
+					$scope.message.content = data;
+					$scope.message.content = data;
+					$element.find('#activityEditModal').modal("show");
+				});
+//				AdminService.saveActivity1(newActivity).then(function(data){
+//					$scope.activity = data;
+//					console.log($scope.activity);
+//					
+//				});
 
 			};
 
