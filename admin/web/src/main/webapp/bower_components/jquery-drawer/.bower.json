@@ -1,0 +1,36 @@
+{
+  "name": "jquery-drawer",
+  "version": "0.1.0",
+  "homepage": "https://github.com/proximity/jquery-drawer",
+  "authors": [
+    "Martin Hipp <martin.hipp@proximity.co.nz>",
+    "Simon White <simon.white@proximity.co.nz>",
+    "Jeffry Ghazally <jeffry.ghazally@proximity.co.nz>"
+  ],
+  "description": "A simple jQuery Hamburger Button Drawer",
+  "main": "jquery.drawer.js",
+  "keywords": [
+    "Drawer",
+    "Hamburger",
+    "Mobile",
+    "Tray"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.0",
+    "commit": "89a5c4593ae999f1bcc1838467d7dcb8ee7f2f45"
+  },
+  "_source": "git://github.com/proximity/jquery-drawer.git",
+  "_target": "~0.1.0",
+  "_originalSource": "jquery-drawer",
+  "_direct": true
+}

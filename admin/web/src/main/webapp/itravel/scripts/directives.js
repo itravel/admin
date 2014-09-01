@@ -17,6 +17,7 @@ function() {
         	$scope.$watch('ngModel',function(newVal,oldVal){
         		if(newVal){
 					$scope.activity = newVal;
+					$scope.queue = [];
 				}
         	})
         	 $scope.isDisabled = function() {
