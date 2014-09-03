@@ -1,4 +1,4 @@
-package com.itravel.admin.services.rest.params;
+package com.itravel.admin.services.rest.aos;
 
 import java.io.Serializable;
 import java.text.ParseException;
