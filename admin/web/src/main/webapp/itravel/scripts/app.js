@@ -5,7 +5,7 @@ var services = {
     lvye_activity: "/admin/services/lvye_activity"
 
 }
-var adminModule = angular.module('admin', ['ngRoute', 'ui.bootstrap','blueimp.fileupload']);
+var adminModule = angular.module('admin', ['ngRoute', 'ui.bootstrap','blueimp.fileupload','textAngular']);
 adminModule.constant('serviceUrl',{
 	activities: "/admin/services/activities/",
     tag: "/admin/services/tags",
