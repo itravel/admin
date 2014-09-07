@@ -133,9 +133,9 @@ angular.module('admin')
         	return $http({
                 method: 'POST',
                 url: serviceUrl.activities,
-                data: $.param(data),
+                data: data,
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                     	
                 }
             });
@@ -144,9 +144,9 @@ angular.module('admin')
         	return $http({
                 method: 'PUT',
                 url: serviceUrl.activities+"/"+id,
-                data: $.param(data),
+                data: data,
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                     	
                 }
             });

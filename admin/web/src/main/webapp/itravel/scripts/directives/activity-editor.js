@@ -24,8 +24,8 @@ angular.module('admin').directive('ngActivityForm', ['AdminService','TagService'
 					$scope.tags = angular.copy($scope.TAGS);
 					if(scope.activity.tags){
 						angular.forEach(scope.activity.tags,function(item){
-							if($scope.tags[""+item]){
-								$scope.tags[""+item].selected = true;
+							if($scope.tags[""+item.id]){
+								$scope.tags[""+item.id].selected = true;
 							}
 						});
 					}
@@ -36,8 +36,8 @@ angular.module('admin').directive('ngActivityForm', ['AdminService','TagService'
 						$scope.tags = angular.copy($scope.TAGS);
 						if(scope.activity.tags){
 							angular.forEach(scope.activity.tags,function(item){
-								if($scope.tags[""+item]){
-									$scope.tags[""+item].selected = true;
+								if($scope.tags[""+item.id]){
+									$scope.tags[""+item.id].selected = true;
 								}
 							});
 						}
@@ -61,16 +61,17 @@ angular.module('admin').directive('ngActivityForm', ['AdminService','TagService'
 			$scope.save = function(activity) {
 				
 				var newActivity = angular.copy(activity);
-				newActivity.images = activity.images.join(",");
+//				newActivity.images = activity.images.join(",");
 				var selectedTags = [];
 				angular.forEach($scope.tags, function(tag) {
 
 					if (tag.selected === true) {
-						selectedTags.push(tag.tag);
+						selectedTags.push({"id":tag.id,"tag":tag.tag});
 					}
 				});
 
-				newActivity.tags = selectedTags.join(",");
+				newActivity.tags = selectedTags;
+				console.log(newActivity)
 				ActivityService.save(newActivity).then(function(data){
 					$scope.$emit("saveActivity",true);
 					$scope.activity = data;

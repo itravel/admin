@@ -12,6 +12,17 @@ angular.module('admin').factory('ActivityService',function($q,ActivityDao,Activi
 	
 	        return d.promise;
 	    },
+	    get:function(id){
+	    	var d = $q.defer();
+	    	
+	        ActivityDao.get(id).success(function(data){
+	            d.resolve(data);
+	        }).error(function(data){
+	            d.reject(data);
+	        });
+	
+	        return d.promise;
+	    },
 	    getUneditDataPage: function(current,number){
 	    	var d = $q.defer();
 	    	

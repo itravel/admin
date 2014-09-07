@@ -1,7 +1,7 @@
 angular.module('admin').controller(
 		'ActivitiesCtrl',
-		[ '$scope', '$location', '$routeParams', 'AdminService',
-				function($scope, $location, $routeParams, AdminService) {
+		[ '$scope', '$location', '$routeParams', 'AdminService','ActivityService',
+				function($scope, $location, $routeParams, AdminService,ActivityService) {
 					$scope.currentPage = 0;
 					$scope.activity = {'editing':false};
 					$scope.activities = [];
@@ -10,14 +10,12 @@ angular.module('admin').controller(
 						$scope.activities = data;
 					});
 					$scope.detail = function(activity) {
-						$scope.activity = angular.copy(activity);
-						$scope.activity.editing = false;
-						if(activity.images){
-							$scope.activity.images = activity.images.split(",");
-						}
-						if(activity.tags){
-							$scope.activity.tags = activity.tags.split(",");
-						}
+						ActivityService.get(activity.id).then(function(data){
+							
+							$scope.activity = data;
+							$scope.activity.editing = false;
+						})
+						
 					};
 					$scope.prePage = function (){
 						if($scope.currentPage <= 0){
