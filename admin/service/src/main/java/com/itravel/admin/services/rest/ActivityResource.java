@@ -1,6 +1,7 @@
 package com.itravel.admin.services.rest;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -12,7 +13,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.collect.Lists;
@@ -21,10 +24,23 @@ import com.itravel.server.dal.entities.ActivityEntity;
 import com.itravel.server.dal.entities.ActivityImageEntity;
 import com.itravel.server.dal.managers.ActivityManager;
 import com.itravel.server.services.json.serializers.ActivityDesrializer;
+import com.itravel.server.services.json.serializers.ActivityImageSimpleSerializer;
+import com.itravel.server.services.json.serializers.ActivitySimpleSerializer;
+import com.itravel.server.services.json.serializers.ActivityTagSimpleSerializer;
 
 @Path("activities")
 public class ActivityResource {
-	private static ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true).registerModule(new SimpleModule().addDeserializer(ActivityEntity.class, new ActivityDesrializer())).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	private static ObjectMapper mapper = new ObjectMapper();
+	protected static final ObjectMapper listObjectMapper = new ObjectMapper();
+	static {
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(new ActivityImageSimpleSerializer()).addDeserializer(ActivityEntity.class, new ActivityDesrializer());
+		SimpleModule listModule = new SimpleModule();
+		listModule.addSerializer(new ActivitySimpleSerializer());
+		
+		mapper.registerModule(module).setDateFormat(new SimpleDateFormat("yyyy-MM-dd")).configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		listObjectMapper.registerModule(listModule).setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+	}
 	private static ActivityManager aManager = new ActivityManager();
 	@PUT
 	@Path("/{id}/editing")
@@ -52,7 +68,15 @@ public class ActivityResource {
 		try {
 			ActivityEntity entity = mapper.readValue(jsonStr,ActivityEntity.class);
 			aManager.save(entity);
-			return Response.ok().entity(entity).build();
+			String activityJsonStr="";
+			try {
+				activityJsonStr = mapper.writeValueAsString(entity);
+				
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return Response.ok().entity(activityJsonStr).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.serverError().entity(e.getMessage()).build();
@@ -66,14 +90,26 @@ public class ActivityResource {
 	public Response create(String jsonStr){
 		try {
 			ActivityEntity entity = mapper.readValue(jsonStr,ActivityEntity.class);
-			List<ActivityImageEntity> dd = Lists.newArrayList();
-//			for(ActivityImageEntity ds : entity.getImages()){
-//				dd.add(ds);
-//			}
-//			entity.getImages().clear();
+			List<ActivityImageEntity> _imageEntities = Lists.newArrayList();
+			for(ActivityImageEntity imageEntity : entity.getImages()){
+				_imageEntities.add(imageEntity);
+			}
+			entity.getImages().clear();
 			aManager.save(entity);
-//			entity.setImages(images);
-			return Response.ok().entity(entity).build();
+			for(ActivityImageEntity imageEntity:_imageEntities){
+				imageEntity.setActivityId(entity.getId());
+			}
+			entity.setImages(_imageEntities);
+			aManager.save(entity);
+			String activityJsonStr="";
+			try {
+				activityJsonStr = mapper.writeValueAsString(entity);
+				
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return Response.ok().entity(activityJsonStr).build();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.serverError().entity(e.getMessage()).build();
